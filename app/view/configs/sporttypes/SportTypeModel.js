@@ -4,8 +4,7 @@
 Ext.define('SportLog.view.configs.sporttypes.SportTypeModel', {
     extend: 'Ext.app.ViewModel',
     alias: 'viewmodel.sporttype-model',
-    
-    
+        
     requires: [
         'SportLog.model.SportType',
         'SportLog.globals.User'

@@ -20,7 +20,6 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     title: 'Tipos de deporte',
     scrollable: true,
     bodyPadding: 10,
-    //html: 'Aqui iran los tipos de deporte posibles que luego serán usados en las sesiones.',
     closable: false,
     border: true,
     collapsible: true,
