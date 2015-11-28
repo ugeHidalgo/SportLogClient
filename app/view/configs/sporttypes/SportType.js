@@ -23,24 +23,52 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     closable: false,
     border: true,
     collapsible: true,
+    selType: 'checkboxmodel',
+    selModel: {
+    	mode : 'MULTI'
+    },
     
     bind: '{sportTypesStore}',
     viewConfig: {
     	emptyText: 'No hay tipos de deporte disponibles'
     },
     
+    plugins : [Ext.create('Ext.grid.plugin.RowEditing', 
+        {
+            clicksToEdit : 2
+        })],
+    
     columns: [{
        	text: 'Código', 
     	dataIndex: 'id', 
     	width: 20, 
-    	align: 'right' 
+    	align: 'right'
     }, { 
     	text: 'Nombre', 
     	dataIndex: 'name', 
-    	width: 140 
+    	width: 140 ,
+    	editor : { allowBlank : true }
     }, { 
     	text: 'Comentarios', 
     	dataIndex: 'coment', 
-    	width: 240
+    	width: 240,
+    	editor : { allowBlank : true }
+    }],
+    buttons: [{ 
+    	text: 'Nuevo',
+        itemId: 'btnNew',
+        handler: 'onClickNew'
+    },{ 
+    	text: 'Recargar',
+        itemId: 'btnLoadStoreData',
+        handler: 'onClickLoadStoreData'
+    },{ 
+		text: 'Borrar',
+        itemId: 'btnDelete',
+        handler: 'onClickDelete'
+    },{ 
+        text: 'Grabar',
+        itemId: 'btnSave',
+        handler: 'onClickSave'
     }]
 });

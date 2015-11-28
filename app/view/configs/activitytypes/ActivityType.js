@@ -24,6 +24,10 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     closable: false,
     border: true,
     collapsible: true,
+    selType: 'checkboxmodel',
+    selModel: {
+    	mode : 'MULTI'
+    },
     
     bind: '{activitiesStore}',
     viewConfig: {
