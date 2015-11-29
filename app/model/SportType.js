@@ -9,7 +9,7 @@ Ext.define ('SportLog.model.SportType', {
     fields: [
         {name: 'id', type: 'int', convert: null},
         {name: 'name', type: 'string' },
-        {name: 'coment', type: 'string'}
+        {name: 'comment', type: 'string'}
     ],
     validators: {
         name: [

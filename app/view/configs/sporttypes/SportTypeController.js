@@ -49,7 +49,17 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     },
     
     onClickSave: function(){
+    	var me = this;
     	
+    	me.sportTypeStore.sync({
+    		success: function (batch, eOpts){
+    			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
+    		}
+    	},{
+    		failure: function (batch, eOpts) {
+    			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
+    		}
+    	});
     }
 });
 

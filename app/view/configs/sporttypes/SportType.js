@@ -50,7 +50,7 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     	editor : { allowBlank : true }
     }, { 
     	text: 'Comentarios', 
-    	dataIndex: 'coment', 
+    	dataIndex: 'comment', 
     	width: 240,
     	editor : { allowBlank : true }
     }],
