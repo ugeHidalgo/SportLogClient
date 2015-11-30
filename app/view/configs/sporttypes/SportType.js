@@ -16,7 +16,7 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     ],
     
     height: 400,
-    width: 400,
+    width: 450,
     title: 'Tipos de deporte',
     scrollable: true,
     bodyPadding: 10,
