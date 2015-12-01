@@ -2,7 +2,7 @@
  * 
  */
 Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.panel.Panel',
     alias: 'widget.activitytype',
     
     controller: 'activitytype-controller',
@@ -14,41 +14,53 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
         'SportLog.view.configs.activitytypes.ActivityTypeController',
         'SportLog.view.configs.activitytypes.ActivityTypeModel'
     ],
-    xtype: 'cell-editing',
     
-    height: 700,
+    height: 515,
     width: 600,
     title: 'Tipos de actividad',
-    scrollable: true,
     bodyPadding: 10,
     closable: false,
     border: true,
     collapsible: true,
-    selType: 'checkboxmodel',
-    selModel: {
-    	mode : 'MULTI'
-    },
+    layout: 'vbox',
     
-    bind: '{activitiesStore}',
-    viewConfig: {
-    	emptyText: 'No hay tipos de actividad disponibles'
-    },
+    items: [{
+    	xtype: 'grid',
+    	itemId: 'sportTypesGrid',
+    	scrollable: true,
+    	flex: 1,
+    	width: '100%',
+    	selType: 'checkboxmodel',
+    	selModel: {
+    		mode : 'MULTI'
+    	},
     
-    columns: [{
-       	text: 'Código', 
-    	dataIndex: 'id', 
-    	width: 20, 
-    	align: 'right' 
-    }, { 
-    	text: 'Nombre', 
-    	dataIndex: 'name', 
-    	width: 140 
-    }, { 
-    	text: 'Tipo de deporte', 
-    	dataIndex: 'sportType_id', 
-    	width: 240,
-    	//header: 'sportType_id',
-        editor: new Ext.form.field.ComboBox({
+    	bind: '{activitiesStore}',
+    	viewConfig: {
+    		emptyText: 'No hay tipos de actividad disponibles'
+    	},
+    	
+    	plugins : [
+    		Ext.create('Ext.grid.plugin.RowEditing', {
+            	clicksToEdit : 2
+        	})
+        ],
+    
+    	columns: [{
+       		text: 'Código', 
+    		dataIndex: 'id', 
+    		width: 40, 
+    		align: 'right' 
+    	}, { 
+    		text: 'Nombre', 
+    		dataIndex: 'name', 
+    		width: 200,
+    		editor : { allowBlank : true }
+    	}, { 
+    		text: 'Tipo de deporte', 
+    		dataIndex: 'sportType_id', 
+    		width: 100,
+        	editor: new Ext.form.field.ComboBox({
                     typeAhead: true,
                     triggerAction: 'all',
                     store: [
@@ -58,6 +70,33 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
                         ['4','el 4'],
                         ['5','el 5']
                     ]
-        })
+        	})
+    	}]
+    },{
+    	xtype: 'container',
+    	margin: '10 0 0 0',
+    	height: 40,
+    	width: '100%',
+    	items: [{
+    		xtype: 'button',
+    		text: 'Nuevo',
+        	itemId: 'btnNew',
+        	handler: 'onClickNew'
+    	},{ 
+    		xtype: 'button',
+    		text: 'Recargar',
+        	itemId: 'btnLoadStoreData',
+        	handler: 'onClickLoadStoreData'
+    	},{ 
+    		xtype: 'button',
+			text: 'Borrar',
+        	itemId: 'btnDelete',
+        	handler: 'onClickDelete'
+    	},{ 
+    		xtype: 'button',
+        	text: 'Grabar',
+        	itemId: 'btnSave',
+        	handler: 'onClickSave'
+    	}]
     }]
 });

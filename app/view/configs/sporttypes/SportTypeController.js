@@ -37,9 +37,9 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     },
     
     onClickDelete: function () {
-    	var me = this,
-    		selectedRows = me.getView().getSelectionModel().getSelection();
-    		
+    	var me = this;
+    		//selectedRows = me.getView().getSelectionModel().getSelection();
+    	debugger;	
         if(selectedRows.length<=0){
         	Ext.Msg.alert('Atención', 'No ha seleccionado ninguna fila para borrar.');
         	return;

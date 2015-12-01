@@ -2,7 +2,7 @@
  * 
  */
 Ext.define('SportLog.view.configs.sporttypes.SportType', {
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.panel.Panel',
     alias: 'widget.sporttype',
     
     controller: 'sporttype-controller',
@@ -15,60 +15,77 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
         'SportLog.view.configs.sporttypes.SportTypeModel'
     ],
     
-    height: 400,
+    height: 515,
     width: 450,
     title: 'Tipos de deporte',
-    scrollable: true,
     bodyPadding: 10,
     closable: false,
     border: true,
     collapsible: true,
-    selType: 'checkboxmodel',
-    selModel: {
-    	mode : 'MULTI'
-    },
+    layout: 'vbox',
     
-    bind: '{sportTypesStore}',
-    viewConfig: {
-    	emptyText: 'No hay tipos de deporte disponibles'
-    },
+    items: [{
+    	xtype: 'grid',
+    	scrollable: true,
+    	flex: 1,
+    	width: '100%',
+    	selType: 'checkboxmodel',
+    	selModel: {
+    		mode : 'MULTI'
+    	},
     
-    plugins : [Ext.create('Ext.grid.plugin.RowEditing', 
-        {
-            clicksToEdit : 2
-        })],
+    	bind: '{sportTypesStore}',
+    	viewConfig: {
+    		emptyText: 'No hay tipos de deporte disponibles'
+    	},
     
-    columns: [{
-       	text: 'Código', 
-    	dataIndex: 'id', 
-    	width: 20, 
-    	align: 'right'
-    }, { 
-    	text: 'Nombre', 
-    	dataIndex: 'name', 
-    	width: 140 ,
-    	editor : { allowBlank : true }
-    }, { 
-    	text: 'Comentarios', 
-    	dataIndex: 'comment', 
-    	width: 240,
-    	editor : { allowBlank : true }
-    }],
-    buttons: [{ 
-    	text: 'Nuevo',
-        itemId: 'btnNew',
-        handler: 'onClickNew'
-    },{ 
-    	text: 'Recargar',
-        itemId: 'btnLoadStoreData',
-        handler: 'onClickLoadStoreData'
-    },{ 
-		text: 'Borrar',
-        itemId: 'btnDelete',
-        handler: 'onClickDelete'
-    },{ 
-        text: 'Grabar',
-        itemId: 'btnSave',
-        handler: 'onClickSave'
+    	plugins : [
+    		Ext.create('Ext.grid.plugin.RowEditing', {
+            	clicksToEdit : 2
+        	})
+        ],
+    
+    	columns: [{
+       		text: 'Código', 
+    		dataIndex: 'id', 
+    		width: 40, 
+    		align: 'right'
+    	}, { 
+    		text: 'Nombre', 
+    		dataIndex: 'name', 
+    		width: 100 ,
+    		editor : { allowBlank : true }
+    	}, { 
+    		text: 'Comentarios', 
+    		dataIndex: 'comment', 
+    		flex: 1,
+    		editor : { allowBlank : true }
+    	}]
+    	},{
+    	xtype: 'container',
+    	margin: '10 0 0 0',
+    	height: 40,
+    	width: '100%',
+    	items: [{
+    		xtype: 'button',
+    		text: 'Nuevo',
+        	itemId: 'btnNew',
+        	handler: 'onClickNew'
+    	},{ 
+    		xtype: 'button',
+    		text: 'Recargar',
+        	itemId: 'btnLoadStoreData',
+        	handler: 'onClickLoadStoreData'
+    	},{ 
+    		xtype: 'button',
+			text: 'Borrar',
+        	itemId: 'btnDelete',
+        	handler: 'onClickDelete'
+    	},{ 
+    		xtype: 'button',
+        	text: 'Grabar',
+        	itemId: 'btnSave',
+        	handler: 'onClickSave'
+    	}]
     }]
 });
