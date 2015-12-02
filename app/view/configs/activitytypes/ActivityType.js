@@ -26,7 +26,7 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     
     items: [{
     	xtype: 'grid',
-    	itemId: 'sportTypesGrid',
+    	id: 'activitiesGrid',
     	scrollable: true,
     	flex: 1,
     	width: '100%',

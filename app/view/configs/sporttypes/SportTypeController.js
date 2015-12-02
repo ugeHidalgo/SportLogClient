@@ -5,11 +5,11 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     extend: 'Ext.app.ViewController',
     alias: 'controller.sporttype-controller',
     
-    sportTypeStore: undefined,
-    
     requires: [
     	'SportLog.utils.APIHelper'
     ],
+    
+    sportTypeStore: undefined,
     
     initViewModel: function() {
     	var me = this,
@@ -37,9 +37,10 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     },
     
     onClickDelete: function () {
-    	var me = this;
-    		//selectedRows = me.getView().getSelectionModel().getSelection();
-    	debugger;	
+    	var me = this,
+    		grid = Ext.getCmp('sportTypesGrid'),
+    		selectedRows = grid.getSelectionModel().getSelection();
+    		
         if(selectedRows.length<=0){
         	Ext.Msg.alert('Atención', 'No ha seleccionado ninguna fila para borrar.');
         	return;
