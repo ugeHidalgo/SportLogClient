@@ -54,6 +54,7 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     	
     	me.sportTypeStore.sync({
     		success: function (batch, eOpts){
+    			me.activitiesStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
     		}
     	},{
