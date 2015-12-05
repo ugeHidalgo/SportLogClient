@@ -7,13 +7,16 @@ Ext.define('SportLog.store.SportType', {
     alias: 'store.SportType',
 
     proxy: {
-        type: 'rest',
-        url: 'http://localhost/SportLog/API/sportTypes',
+        type: 'ajax',
+        url: '/SportLogServer/API/sportTypes',
+//        headers: {
+//        	'Authorization' : SportLog.globals.User.apiKey
+//        },
         reader: {
             type: 'json',
             rootProperty: 'data'
         }
     },
-    autoLoad: true,
+    //autoLoad: true,
     autoSync: true
 });

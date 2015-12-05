@@ -12,7 +12,8 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
 
     requires: [
         'SportLog.view.configs.activitytypes.ActivityTypeController',
-        'SportLog.view.configs.activitytypes.ActivityTypeModel'
+        'SportLog.view.configs.activitytypes.ActivityTypeModel',
+        'SportLog.view.configs.sporttypes.SportTypeModel'
     ],
     
     height: 515,
@@ -61,15 +62,36 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     		dataIndex: 'sportType_id', 
     		width: 100,
         	editor: new Ext.form.field.ComboBox({
-                    typeAhead: true,
-                    triggerAction: 'all',
-                    store: [
-                        ['1','el 1'],
-                        ['2','el 2'],
-                        ['3','el 3'],
-                        ['4','el 4'],
-                        ['5','el 5']
-                    ]
+        			id: 'sportTypesCombobox',
+        			displayField: 'name',
+        			valueField: 'id',
+        			queryMode: 'local'
+//                  typeAhead: true,
+//                    triggerAction: 'all',
+//     				store: undefined
+//                    store: Ext.create('Ext.data.Store',{
+//    							model: 'SportType',
+//    							proxy: {
+//        							type: 'ajax',
+//        							url: '/SportLogServer/API/sportTypes',
+//        							headers: {
+//        								'Authorization' : SportLog.globals.User.apiKey
+//        							},
+//        							reader: {
+//            							type: 'json',
+//            							rootProperty: 'data'
+//        							}
+//    							},
+//    							autoLoad: true
+//    							//autoSync: true
+//    						})
+//                    store: [
+//                        ['1','el 1'],
+//                        ['2','el 2'],
+//                        ['3','el 3'],
+//                        ['4','el 4'],
+//                        ['5','el 5']
+//                    ]
         	})
     	}]
     },{

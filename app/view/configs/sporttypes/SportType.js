@@ -41,8 +41,11 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     	},
     
     	plugins : [
-    		Ext.create('Ext.grid.plugin.RowEditing', {
-            	clicksToEdit : 2
+//    		Ext.create('Ext.grid.plugin.RowEditing', {
+//            	clicksToEdit : 2
+//        	})
+    		Ext.create('Ext.grid.plugin.CellEditing', {
+            	clicksToEdit : 1
         	})
         ],
     

@@ -18,12 +18,6 @@ Ext.define('SportLog.view.configs.sporttypes.SportTypeModel', {
             proxy: {
         		type: 'ajax',
         		url: '/SportLogServer/API/sportTypes',
-//        		api: {
-//        			read : '/SportLogServer/API/sportTypes',
-//        			create : '/SportLogServer/API/sportTypes',
-//        			update : '/SportLogServer/API/sportTypes',
-//        			destroy : '/SportLogServer/API/sportTypes'
-//        		},
         		actionMethods: {
         			read: 'GET',
         			create: 'POST',

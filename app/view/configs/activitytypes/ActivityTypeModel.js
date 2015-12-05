@@ -7,6 +7,7 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityTypeModel', {
     
         requires: [
         'SportLog.model.Activity',
+        //'SportLog.model.SportType',
         'SportLog.globals.User'
         ],
     
@@ -38,5 +39,21 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityTypeModel', {
         		}
     		}
         }
+//        sportTypesStore: {
+//            model: 'SportType',
+//            autoLoad: true,
+//            
+//            proxy: {
+//        		type: 'ajax',
+//        		url: '/SportLogServer/API/sportTypes',
+//        		headers: {
+//        			'Authorization' : SportLog.globals.User.apiKey
+//        		},
+//        		reader: {
+//            		type: 'json',
+//            		rootProperty: 'data'
+//        		}
+//    		}
+//        }
     }
 });

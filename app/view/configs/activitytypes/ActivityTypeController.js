@@ -6,22 +6,48 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     alias: 'controller.activitytype-controller',
    
     requires: [
-    	'SportLog.utils.APIHelper'
+    	'SportLog.utils.APIHelper',
+    	'SportLog.store.SportType'
     ],
     
+    sportTypesComboStore: undefined,
+    
      activitiesStore: undefined,
+     
     
     initViewModel: function() {
     	var me = this,
     		apiHelper = Ext.create ('SportLog.utils.APIHelper');
+    			
+    	me.createSportTypesComboboxStore();
     	
     	apiHelper.setApiKey(me.getStore('activitiesStore'));
+    
     	
     	me.activitiesStore = me.getStore('activitiesStore');
+    },
+    
+    createSportTypesComboboxStore: function (){
+    	var me = this;
     	
-//    	this.cellEditing = new Ext.grid.plugin.CellEditing({
-//            clicksToEdit: 1
-//    	});
+    	me.sportTypesComboStore = Ext.create('Ext.data.Store',{
+    		model: 'SportLog.model.SportType',
+    		proxy: {
+        		type: 'ajax',
+        		url: '/SportLogServer/API/sportTypes',
+        		headers: {
+        			'Authorization' : SportLog.globals.User.apiKey
+        		},
+        		reader: {
+            		type: 'json',
+            		rootProperty: 'data'
+        		}
+    		},
+    		autoLoad: true
+    	});
+    	
+    	var sportTypesCombo = Ext.getCmp('sportTypesCombobox');
+    	sportTypesCombo.bindStore(me.sportTypesComboStore);
     },
         
     onClickLoadStoreData : function (){
