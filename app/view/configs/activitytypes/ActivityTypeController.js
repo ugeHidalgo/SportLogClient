@@ -26,7 +26,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     },
     
     createSportTypesComboboxStore: function (){
-    	var me = this;
+    	var me = this, sportTypesCombo;
     	
     	me.sportTypesComboStore = Ext.create('Ext.data.Store',{
     		model: 'SportLog.model.SportType',
@@ -44,8 +44,24 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     		autoLoad: true
     	});
     	
-    	var sportTypesCombo = Ext.getCmp('sportTypesCombobox');
+    	sportTypesCombo = Ext.getCmp('sportTypesCombobox');
     	sportTypesCombo.bindStore(me.sportTypesComboStore);
+    },
+    
+    renderFunction : function(value){
+    	var me = this,
+    		sportTypesCombo,record;
+    	
+    	sportTypesCombo = Ext.getCmp('sportTypesCombobox');
+//    	record = sportTypesCombo.findRecord (sportTypesCombo.valueField, value);
+//    	return record ? record.get(sportTypesCombo.displayField) : 'Valor no encontrado';
+    	record = me.sportTypesComboStore.findRecord ('id', value);
+    		
+    	if (!record){
+    		me.sportTypesComboStore.load();
+    		record = me.sportTypesComboStore.findRecord ('id', value);
+    	}
+    	return record ? record.get('name') : 'Valor no encontrado';
     },
         
     onClickLoadStoreData : function (){
