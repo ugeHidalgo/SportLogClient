@@ -15,7 +15,8 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
         'SportLog.view.configs.ConfigsDashboardModel',
         'SportLog.view.configs.sporttypes.SportType',
         'SportLog.view.configs.activitytypes.ActivityType',
-        'SportLog.view.configs.userprofile.UserProfile'
+        'SportLog.view.configs.userprofile.UserProfile',
+        'SportLog.view.configs.materials.Material'
     ],
     
     height: 700,
@@ -72,6 +73,7 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
        			margin: 5
        		},
         	items: [{
+        		xtype: 'material'
         	}]
         }]
     }] 
