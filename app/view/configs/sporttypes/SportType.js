@@ -18,7 +18,7 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     height: 515,
     width: 450,
     title: 'Tipos de deporte',
-    bodyPadding: 10,
+    frame: true,
     closable: false,
     border: true,
     collapsible: true,
@@ -41,9 +41,6 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     	},
     
     	plugins : [
-//    		Ext.create('Ext.grid.plugin.RowEditing', {
-//            	clicksToEdit : 2
-//        	})
     		Ext.create('Ext.grid.plugin.CellEditing', {
             	clicksToEdit : 1
         	})
@@ -64,32 +61,40 @@ Ext.define('SportLog.view.configs.sporttypes.SportType', {
     		dataIndex: 'comment', 
     		flex: 1,
     		editor : { allowBlank : true }
-    	}]
-    	},{
-    	xtype: 'container',
-    	margin: '10 0 0 0',
-    	height: 40,
-    	width: '100%',
-    	items: [{
-    		xtype: 'button',
-    		text: 'Nuevo',
-        	itemId: 'btnNew',
-        	handler: 'onClickNew'
-    	},{ 
-    		xtype: 'button',
-    		text: 'Recargar',
-        	itemId: 'btnLoadStoreData',
-        	handler: 'onClickLoadStoreData'
-    	},{ 
-    		xtype: 'button',
-			text: 'Borrar',
-        	itemId: 'btnDelete',
-        	handler: 'onClickDelete'
-    	},{ 
-    		xtype: 'button',
-        	text: 'Grabar',
-        	itemId: 'btnSave',
-        	handler: 'onClickSave'
+    	}],
+    	
+    	dockedItems: [{
+    		xtype: 'toolbar',
+    		dock: 'bottom',
+    		ui: 'footer',
+    		layout:{
+    			pack: 'left'
+    		},
+    		items: [{
+    			text: 'Nuevo',
+    			tooltip: 'Crear un nuevo tipo de deporte.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnNew',
+        		handler: 'onClickNew'
+    		},{ 
+    			text: 'Recargar',
+    			tooltip: 'Recargar los tipos de deporte desechando los cambios.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnLoadStoreData',
+        		handler: 'onClickLoadStoreData'
+    		},{ 
+				text: 'Borrar',
+				tooltip: 'Borrar los tipos de deportes seleccionados.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnDelete',
+        		handler: 'onClickDelete'
+    		},{ 
+        		text: 'Grabar',
+        		tooltip: 'Grabar los cambios realizados a las tipos de deportes.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnSave',
+        		handler: 'onClickSave'
+    		}]
     	}]
     }]
 });

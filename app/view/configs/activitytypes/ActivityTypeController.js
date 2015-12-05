@@ -22,8 +22,6 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     	me.createSportTypesComboboxStore();
     	
     	apiHelper.setApiKey(me.getStore('activitiesStore'));
-    
-    	
     	me.activitiesStore = me.getStore('activitiesStore');
     },
     

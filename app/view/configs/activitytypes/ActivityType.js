@@ -19,7 +19,7 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     height: 515,
     width: 600,
     title: 'Tipos de actividad',
-    bodyPadding: 10,
+    frame: true,
     closable: false,
     border: true,
     collapsible: true,
@@ -42,8 +42,8 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     	},
     	
     	plugins : [
-    		Ext.create('Ext.grid.plugin.RowEditing', {
-            	clicksToEdit : 2
+    		Ext.create('Ext.grid.plugin.RowEditing', { //TODO: da problemas con el auth del servicio si cambio a CellEditing
+            	clicksToEdit : 1
         	})
         ],
     
@@ -66,59 +66,67 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
         			displayField: 'name',
         			valueField: 'id',
         			queryMode: 'local'
-//                  typeAhead: true,
-//                    triggerAction: 'all',
-//     				store: undefined
-//                    store: Ext.create('Ext.data.Store',{
-//    							model: 'SportType',
-//    							proxy: {
-//        							type: 'ajax',
-//        							url: '/SportLogServer/API/sportTypes',
-//        							headers: {
-//        								'Authorization' : SportLog.globals.User.apiKey
-//        							},
-//        							reader: {
-//            							type: 'json',
-//            							rootProperty: 'data'
-//        							}
-//    							},
-//    							autoLoad: true
-//    							//autoSync: true
-//    						})
-//                    store: [
-//                        ['1','el 1'],
-//                        ['2','el 2'],
-//                        ['3','el 3'],
-//                        ['4','el 4'],
-//                        ['5','el 5']
-//                    ]
         	})
+    	}],
+    	
+    	dockedItems: [{
+    		xtype: 'toolbar',
+    		dock: 'bottom',
+    		ui: 'footer',
+    		layout:{
+    			pack: 'left'
+    		},
+    		items: [{
+    			text: 'Nuevo',
+    			tooltip: 'Crear un nuevo tipo de actividad.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnNew',
+        		handler: 'onClickNew'
+    		},{ 
+    			text: 'Recargar',
+    			tooltip: 'Recargar las actividades desechando los cambios.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnLoadStoreData',
+        		handler: 'onClickLoadStoreData'
+    		},{ 
+				text: 'Borrar',
+				tooltip: 'Borrar las actividades seleccionados.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnDelete',
+        		handler: 'onClickDelete'
+    		},{ 
+        		text: 'Grabar',
+        		tooltip: 'Grabar los cambios realizados a las actividades.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnSave',
+        		handler: 'onClickSave'
+    		}]
     	}]
-    },{
-    	xtype: 'container',
-    	margin: '10 0 0 0',
-    	height: 40,
-    	width: '100%',
-    	items: [{
-    		xtype: 'button',
-    		text: 'Nuevo',
-        	itemId: 'btnNew',
-        	handler: 'onClickNew'
-    	},{ 
-    		xtype: 'button',
-    		text: 'Recargar',
-        	itemId: 'btnLoadStoreData',
-        	handler: 'onClickLoadStoreData'
-    	},{ 
-    		xtype: 'button',
-			text: 'Borrar',
-        	itemId: 'btnDelete',
-        	handler: 'onClickDelete'
-    	},{ 
-    		xtype: 'button',
-        	text: 'Grabar',
-        	itemId: 'btnSave',
-        	handler: 'onClickSave'
-    	}]
-    }]
+    }//,{
+//    	xtype: 'container',
+//    	margin: '10 0 0 0',
+//    	height: 40,
+//    	width: '100%',
+//    	items: [{
+//    		xtype: 'button',
+//    		text: 'Nuevo',
+//        	itemId: 'btnNew',
+//        	handler: 'onClickNew'
+//    	},{ 
+//    		xtype: 'button',
+//    		text: 'Recargar',
+//        	itemId: 'btnLoadStoreData',
+//        	handler: 'onClickLoadStoreData'
+//    	},{ 
+//    		xtype: 'button',
+//			text: 'Borrar',
+//        	itemId: 'btnDelete',
+//        	handler: 'onClickDelete'
+//    	},{ 
+//    		xtype: 'button',
+//        	text: 'Grabar',
+//        	itemId: 'btnSave',
+//        	handler: 'onClickSave'
+//    	}]
+    ]//}]
 });

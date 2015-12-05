@@ -18,6 +18,9 @@
 
     title: 'Usuarios registrados',
     collapsible: true,
+    frame: true,
+    closable: false,
+    border: true,
     
     bind: '{usersListStore}',
     viewConfig: {
