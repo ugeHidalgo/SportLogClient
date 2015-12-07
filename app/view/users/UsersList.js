@@ -39,20 +39,24 @@
             handler: 'setUserAdminValue'
         }]
     }, {
+    	xtype: 'checkcolumn',
        	text: 'Ac', 
     	dataIndex: 'status', 
     	width: 40, 
-    	align: 'center' 
+    	align: 'center',
+    	processEvent: function () { return false; }
     }, { 
+    	xtype: 'checkcolumn',
     	text: 'Ad', 
     	dataIndex: 'admin', 
     	width: 40, 
-    	align: 'center'
+    	align: 'center',
+    	processEvent: function () { return false; }
     }, { 
     	text: 'Fecha registro', 
     	dataIndex: 'created_at', 
     	width: 140,
-    	renderer: Ext.util.Format.dateRenderer ('d-m-Y'),
+    	renderer: Ext.util.Format.dateRenderer ('d/m/Y'),
     	align: 'center'//, style: 'text-align:left' //first for column, second for header title
     }, { 
     	text: 'Usuario',  
