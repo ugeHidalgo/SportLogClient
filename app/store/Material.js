@@ -8,7 +8,7 @@
 
     proxy: {
         type: 'ajax',
-        url: '/SportLogServer/API/materials',
+        url: '/SportLogServer/API/Materials/materials',
         headers: {
         	'Authorization' : SportLog.globals.User.apiKey
         },

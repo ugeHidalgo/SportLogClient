@@ -17,7 +17,7 @@
             
             proxy: {
         		type: 'ajax',
-        		url: '/SportLogServer/API/materials',
+        		url: '/SportLogServer/API/Materials/materials',
         		actionMethods: {
         			read: 'GET',
         			create: 'POST',
