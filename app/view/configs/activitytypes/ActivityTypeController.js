@@ -32,7 +32,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     		model: 'SportLog.model.SportType',
     		proxy: {
         		type: 'ajax',
-        		url: '/SportLogServer/API/sportTypes',
+        		url: '/SportLogServer/API/SportTypes/sportTypes',
         		headers: {
         			'Authorization' : SportLog.globals.User.apiKey
         		},

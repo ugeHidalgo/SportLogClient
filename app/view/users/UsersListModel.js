@@ -17,7 +17,7 @@
             
             proxy: {
         		type: 'ajax',
-        		url: '/SportLogServer/API/users',
+        		url: '/SportLogServer/API/Users/users',
         		headers: {
         			'Authorization' : SportLog.globals.User.apiKey
         		},

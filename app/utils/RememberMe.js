@@ -22,7 +22,7 @@
 //	},
 
 	createRememberMeField : function(fieldNameToSet, fieldValueToSet) {
-		var me = this, urlToCreate = '/SportlogServer/API/rememberMe';
+		var me = this, urlToCreate = '/SportlogServer/API/RememberMe/rememberMe';
 
 		Ext.Ajax.request({
 					url : urlToCreate,
@@ -43,7 +43,7 @@
 	},
 
 	deleteRememberMeField : function(fieldName) {
-		var me = this, urlToDelete = '/SportlogServer/API/rememberMe/'
+		var me = this, urlToDelete = '/SportlogServer/API/RememberMe/rememberMe/'
 				+ fieldName;
 
 		Ext.Ajax.request({

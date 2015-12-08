@@ -17,7 +17,7 @@ Ext.define('SportLog.view.configs.sporttypes.SportTypeModel', {
             
             proxy: {
         		type: 'ajax',
-        		url: '/SportLogServer/API/sportTypes',
+        		url: '/SportLogServer/API/SportTypes/sportTypes',
         		actionMethods: {
         			read: 'GET',
         			create: 'POST',

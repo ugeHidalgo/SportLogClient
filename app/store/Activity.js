@@ -8,7 +8,7 @@
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost/SportLog/API/activities',
+        url: 'http://localhost/SportLog/API/Activities/activities',
         reader: {
             type: 'json',
             rootProperty: 'data'

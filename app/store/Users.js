@@ -11,7 +11,7 @@ Ext.define ('SportLog.store.Users',{
     autoload: true,
     proxy: {
         type: 'ajax',
-        url: '/SportLogServer/API/users',
+        url: '/SportLogServer/API/Users/users',
         reader: {
             type: 'json',
             rootProperty: 'data' //users
