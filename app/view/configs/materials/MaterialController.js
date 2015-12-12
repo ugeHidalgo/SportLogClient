@@ -63,5 +63,15 @@
     			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
     		}
     	});
+    },
+    
+    onSelectionChange: function(model, records) {
+        var rec = records[0],
+            me = this;
+               
+        if (rec) {
+        	materialForm = Ext.getCmp('materialsForm');
+            materialForm.getForm().loadRecord(rec);
+        }
     }
  });
