@@ -23,7 +23,7 @@
         reference: 'materialsWindowForm',
         scrollable: true,
         layout: {
-            type: 'vbox',
+            type: 'vbox'
             //align: 'stretch'
         },
         border: false,
@@ -173,7 +173,7 @@
 				tooltip: 'Cerrar ventana sin grabar cambios.',
     			//iconCls: 'poner aqui el icono correspondiente',
         		itemId: 'btnWindowClose',
-        		handler: 'onClickWndowClose'
+        		handler: 'onClickWindowClose'
     		},{ 
         		text: 'Grabar',
         		tooltip: 'Grabar los cambios realizados.',
