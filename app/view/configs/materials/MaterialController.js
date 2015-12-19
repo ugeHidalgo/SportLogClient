@@ -8,7 +8,7 @@
     requires: [
     	'SportLog.utils.APIHelper',
     	'SportLog.store.Material',
-    	'SportLog.view.configs.materials.MaterialForm'
+    	'SportLog.view.configs.materials.MaterialPanel'
     ],
     
     materialsStore: undefined,

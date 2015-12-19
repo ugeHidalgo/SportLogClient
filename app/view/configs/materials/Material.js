@@ -12,25 +12,27 @@
 
     requires: [
         'SportLog.view.configs.materials.MaterialController',
-        'SportLog.view.configs.materials.MaterialModel'
+        'SportLog.view.configs.materials.MaterialModel',
+        'SportLog.view.configs.materials.MaterialPanel'
     ],
     
-    height: 515,
+    height: 550,
     width: '100%',
-    title: 'Materiales',
     id: 'materialsForm',
-    frame: true,
+    frame: false,
     closable: false,
-    border: true,
-    collapsible: true,
-    layout: 'hbox',
+    border: false,
+    collapsible: false,
+    layout: 'vbox',
     
     items: [{
+    	xtype: 'material-panel'
+    },{
     	xtype: 'grid',
     	id: 'materialsGrid',
     	scrollable: true,
     	border: true,
-    	height: '100%',
+    	height: 200,
     	width: '100%', //'50%',
     	selType: 'checkboxmodel',
     	selModel: {
@@ -49,62 +51,52 @@
         ],
     
     	columns: [{ 
-    		xtype: 'checkcolumn',
-    		text: 'Activo',
-    		dataIndex: 'status', 
-    		width: 60 ,
-    		editor : { allowBlank : false },
-    		processEvent: function () { return false; },
-    		align: 'center'
-    	},{ 
+//    		xtype: 'checkcolumn',
+//    		text: 'Activo',
+//    		dataIndex: 'status', 
+//    		width: 60 ,
+//    		editor : { allowBlank : false },
+//    		processEvent: function () { return false; },
+//    		align: 'center'
+//    	},{ 
     		text: 'Alias', 
     		dataIndex: 'alias', 
-    		width: 100 ,
-    		editor : { allowBlank : true }
+    		width: 100
     	},{ 
     		text: 'Modelo', 
     		dataIndex: 'name', 
-    		width: 100 ,
-    		editor : { allowBlank : true }
+    		width: 100
     	}, { 
     		text: 'Marca', 
     		dataIndex: 'brand', 
-    		width: 100 ,
-    		editor : { allowBlank : true }
-    	},{ 
-//    		text: 'Parte de...', 
-//    		dataIndex: 'parent_id', 
-//    		width: 100 ,
-//    		editor : { allowBlank : true } //todo: poner un comobobox a materials
-//    	},{ 
+    		width: 100
+    	},{
     		text: 'Creado',
     		dataIndex: 'created_at', 
     		width: 100,
     		renderer: Ext.util.Format.dateRenderer ('d/m/Y'), 
     		align: 'center'
 	   	},{ 
-    		xtype: 'datecolumn',
+    		//xtype: 'datecolumn',
     		text: 'Compra', 
     		dataIndex: 'purchase_date', 
     		width: 100 ,
-    		editor : {
-    			xtype: 'datefield',
-    			allowBlank : true,
-    			format: 'd/m/Y'
-    		},
+//    		editor : {
+//    			xtype: 'datefield',
+//    			allowBlank : true,
+//    			format: 'd/m/Y'
+//    		},
     		renderer: Ext.util.Format.dateRenderer ('d/m/Y'), 
     		align: 'center'
     	},{ 
     		text: 'Inic(Tiempo)', 
     		dataIndex: 'initial_time', 
-    		width: 120 ,
-    		editor : { allowBlank : true }, 
+    		width: 120,
     		align: 'right'
     	},{ 
     		text: 'Inic(Dist)', 
     		dataIndex: 'initial_distance', 
-    		width: 120 ,
-    		editor : { allowBlank : true }, 
+    		width: 120, 
     		align: 'right'
     	},{ 
     		text: 'Uso(Tiempo)', 
@@ -119,71 +111,67 @@
     	},{ 
     		text: 'Máx(Tiempo)', 
     		dataIndex: 'max_time', 
-    		width: 120 ,
-    		editor : { allowBlank : true }, 
+    		width: 120, 
     		align: 'right'
     	},{ 
     		text: 'Máx(Dist.)', 
     		dataIndex: 'max_distance', 
-    		width: 120 ,
-    		editor : { allowBlank : true }, 
+    		width: 120, 
     		align: 'right'
     	},{ 
     		text: 'Comentarios', 
     		dataIndex: 'comment', 
-    		width: 150 ,
-    		editor : { allowBlank : true }
+    		width: 150 
     	}],
     	
     	listeners: {
-            //selectionchange: 'onSelectionChange',
             rowdblclick: 'onSelectMaterial'
-        },
+        }
     	
-    	dockedItems: [{
-    		xtype: 'toolbar',
-    		dock: 'bottom',
-    		ui: 'footer',
-    		layout:{
-    			pack: 'left'
-    		},
-    		items: [{
-    			text: 'Nuevo',
-    			tooltip: 'Crear un nuevo tipo de material deportivo.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnNew',
-        		handler: 'onClickNew'
-    		},{ 
-    			text: 'Recargar',
-    			tooltip: 'Recargar los materiales deportivos desechando los cambios.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnLoadStoreData',
-        		handler: 'onClickLoadStoreData'
-    		},{ 
-				text: 'Borrar',
-				tooltip: 'Borrar los materiales seleccionados.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnDelete',
-        		handler: 'onClickDelete'
-    		},{ 
-				text: 'Activar',
-				tooltip: 'Activar los materiales seleccionados.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnActivate',
-        		handler: 'onClickActivate'
-    		},{ 
-				text: 'Desactivar',
-				tooltip: 'Desactivar los materiales seleccionados.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnDeactivate',
-        		handler: 'onClickDeactivate'
-    		},{ 
-        		text: 'Grabar',
-        		tooltip: 'Grabar los cambios realizados a los materiales deportivos.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnSave',
-        		handler: 'onClickSave'
-    		}]
-    	}]
+//    	dockedItems: [{
+//    		xtype: 'toolbar',
+//    		dock: 'bottom',
+//    		ui: 'footer',
+//    		layout:{
+//    			pack: 'left'
+//    		},
+//    		items: [{
+//    			text: 'Nuevo',
+//    			tooltip: 'Crear un nuevo tipo de material deportivo.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnNew',
+//        		handler: 'onClickNew'
+//    		},{ 
+//    			text: 'Recargar',
+//    			tooltip: 'Recargar los materiales deportivos desechando los cambios.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnLoadStoreData',
+//        		handler: 'onClickLoadStoreData'
+//    		},{ 
+//				text: 'Borrar',
+//				tooltip: 'Borrar los materiales seleccionados.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnDelete',
+//        		handler: 'onClickDelete'
+//    		},{ 
+//				text: 'Activar',
+//				tooltip: 'Activar los materiales seleccionados.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnActivate',
+//        		handler: 'onClickActivate'
+//    		},{ 
+//				text: 'Desactivar',
+//				tooltip: 'Desactivar los materiales seleccionados.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnDeactivate',
+//        		handler: 'onClickDeactivate'
+//    		},{ 
+//        		text: 'Grabar',
+//        		tooltip: 'Grabar los cambios realizados a los materiales deportivos.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnSave',
+//        		handler: 'onClickSave'
+//    		}]
+//    	}]
     }]
  });
