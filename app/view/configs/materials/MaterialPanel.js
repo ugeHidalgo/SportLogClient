@@ -9,84 +9,70 @@
     width: '100%',
     height: 350,
     layout: 'vbox',
-    border: false,
-    //bodyPadding: 5,
-    scrollable: true,
-//    fieldDefaults: {
-//    	msgTarget: 'side',
-//        labelAlign: 'top',
-//        labelStyle: 'font-weight:bold'
-//    },  
+    border: false, 
     
     items: [{
        	xtype: 'container',
        	width: '100%',
         layout: 'hbox',
-        defaultType: 'textfield',
         items: [{
        		xtype: 'fieldset',
     		title:'Detalles del material',
        		border: true,
        		margin: '0 5 0 0',
+       		height: 200,
     		width: '50%',
        		layout: 'vbox',
+       		fieldDefaults: {
+       				labelAlign: 'top',
+       				flex: 1,
+       				margin: '0 5 0 0'
+    			},
        		items: [{
        			xtype: 'container',
        			layout: 'hbox',
        			defaultType: 'textfield',
+       			fieldDefaults: {
+       				margin: '-10 10 0 0',
+       				fieldStyle: 'text-align: left'
+    			},
        			items: [{
        				fieldLabel: 'Alias:',
        				name: 'alias',
-        			labelAlign : 'top',
-        			margin: '-10 10 0 0',
-        			flex: 1,
         			afterLabelTextTpl: [
                			'<span style="color:red;font-weight:bold" data-qtip="Requerido">*</span>'
            			],
            			allowBlank: false
        			},{
        				fieldLabel: 'Modelo:',
-           			name: 'name',
-           			labelAlign : 'top',
-           			margin: '-10 10 0 0',
-           			flex: 1
+           			name: 'name'
        			},{
        				fieldLabel: 'Marca:',
-           			labelAlign : 'top',
-           			margin: '-10 0 0 0',
-           			name: 'brand',
-           			flex: 1
+           			name: 'brand'
        			}]
        		},{
        			xtype: 'container',
            		layout: 'hbox',
-           		defaultType: 'textfield',
+           		defaultType: 'datefield',
+           		fieldDefaults: {
+       				margin: '-10 10 0 0',
+       				fieldStyle: 'text-align: center'
+    			},
            		items: [{
        				xtype: 'checkbox',
        				fieldLabel: 'Activo:',
-           			name: 'status',
-           			margin: '0 40 0 0',
-           			labelAlign : 'top'
+           			name: 'status'
        			},{
-           			xtype: 'datefield',
             		fieldLabel: 'Alta:',
            			name: 'created_at',
-           			labelAlign : 'top',
-           			margin: '0 10 0 0',
-           			width: 130,
        				renderer: Ext.util.Format.dateRenderer ('d/m/Y')
             	},{
-       				xtype: 'datefield',
        				fieldLabel: 'Compra:',
-           			name: 'purchase_date',
-           			margin: '0 10 0 0',
-           			labelAlign : 'top',
-           			width: 130
+           			name: 'purchase_date'
    	   			},{
+   	   				xtype: 'textfield',
        				fieldLabel: 'Parte de:',
-       				name: 'parent_id',  //TODO: poner un combo que coja datos de
-      				labelAlign : 'top',
-       				flex: 1
+       				name: 'parent_id'  //TODO: poner un combo que coja datos de
     			}]
     		}]
     	},{
@@ -99,6 +85,7 @@
    				title:'Detalles de uso',
     			border: true,
     			margin: '0 15 0 0',
+    			height: 200,
    				width: '100%',
     			layout: 'vbox',
     			defaultType: 'fieldcontainer',
@@ -149,7 +136,7 @@
     	xtype: 'fieldset',
     	title:'Otros datos',
        	border: true,
-       	margin: '0 -15 0 0',
+       	margin: '0 15 0 0',
     	width: '100%',
        	layout: 'vbox',
        	items: [{

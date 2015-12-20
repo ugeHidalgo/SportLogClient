@@ -24,6 +24,7 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
     title: 'Configuración',
     border: true,
     frame: true,
+    scrollable: true,
     
     items: [{
        xtype: 'tabpanel',
@@ -31,8 +32,9 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
        defaults: {
        		xtype: 'panel',
        		height: 700,
+       		width: '100%',
        		closable: false,
-       		bodypadding: 10,
+       		bodypadding: 5,
        		collapsible: true,
        		border: true
        },
@@ -50,7 +52,7 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
        		autoScroll: true,
        		defaults: {
        			margin: 5
-       		},
+      		},
        		items: [{
         		xtype: 'sporttype'
        		},{
@@ -59,7 +61,6 @@ Ext.define('SportLog.view.configs.ConfigsDashboard', {
        	},{
        		itemId: 'UsersConfigTab',
        		title: 'Usuarios',
-       		//height: 400,
        		defaults: {
        			margin: 5
        		},
