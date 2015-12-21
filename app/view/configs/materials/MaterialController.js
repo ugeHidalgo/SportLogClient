@@ -13,6 +13,7 @@
     
     materialsStore: undefined,
     selectedRecord: undefined,
+    materialForm: undefined,
      
     initViewModel: function() {
     	var me = this,
@@ -20,15 +21,44 @@
     	
     	apiHelper.setApiKey(me.getStore('materialsStore'));
     	me.materialsStore = me.getStore('materialsStore');
+    	me.materialForm = Ext.getCmp('materialsForm');
     },
     
     onSelectionChange: function(model, records) {
     	var rec = records[0],
             me = this;
-               
-        if (rec) {
-        	materialForm = Ext.getCmp('materialsForm');
-            materialForm.getForm().loadRecord(rec);
+            
+        if (!me.existChangesOnWindow()) {
+        	if (rec) {
+        		me.materialForm.getForm().loadRecord(rec);
+        		me.selectedRecord = rec;    
+        	}
+        	return;
+        }
+        
+        if (rec.id!==me.selectedRecord.id){
+    		Ext.MessageBox.show ({
+    			title: 'Confirmar',
+    			msg: 'Hay cambios pendientes de grabar, si continua se perderán los cambios.',
+    			buttons: Ext.MessageBox.YESNO,
+    			buttonsText: {
+    				yes : 'SI',
+    				no : 'NO'
+    			},
+    			scope: me,
+    			fn: function (btn, text){
+    					if (btn=='yes'){
+    						if (rec) {
+        						me.materialForm.getForm().loadRecord(rec);
+        						me.selectedRecord = rec;
+        						return;
+    						}
+    					} else {
+    						me.findAndSelectRecordInGrid(me.selectedRecord);
+    						return;
+    					}
+    			}
+    		});  
         }
     },
     
@@ -36,17 +66,53 @@
     	var me = this;
     		
     	me.materialsStore.load();
+    	me.clearForm();
+   		me.loadSelectedRecord();
+    },
+    
+    findAndSelectRecordInGrid: function (record) {
+    	var me = this,
+	   		grid = Ext.getCmp('materialsGrid');
+	   			
+    	grid.getSelectionModel().select(record);
+    },
+    
+    clearForm: function () {
+    	var me = this;
+
+    	me.materialForm.getForm().getFields().each(function(field){
+    		field.validateOnChange = false;
+    		field.setValue('');
+    		if (field=='id'){
+    			field.setValue('-1');
+    		}
+    		field.resetOriginalValue();
+    	});
+    },
+    
+    loadSelectedRecord: function (){
+    	var me = this;
+    	if (me.selectedRecord) {
+            me.materialForm.getForm().loadRecord(me.selectedRecord);
+        }
     },
    
     onClickNew: function () {
     	var me = this;
-        
+
         var materialModel = Ext.create('SportLog.model.Material');
-        materialModel.set("id", "");
+        //materialModel.set("id","-1");
         materialModel.set("status", "1");
         materialModel.set("created_at",new Date());
         me.materialsStore.add(materialModel);
+    },
+    
+    existChangesOnWindow: function () {
+    	var me = this;
+    	return me.materialForm.getForm().isDirty()
     }
+ 
+    
 //    
 //    onClickDelete: function () {
 //    	var me = this,

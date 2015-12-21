@@ -9,7 +9,7 @@
     width: '100%',
     height: 350,
     layout: 'vbox',
-    border: false, 
+    border: false,
     
     items: [{
        	xtype: 'container',

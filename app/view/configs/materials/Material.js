@@ -24,6 +24,7 @@
     border: false,
     collapsible: false,
     layout: 'vbox',
+    trackResetOnLoad: true,
     
     items: [{
     	xtype: 'material-panel'
