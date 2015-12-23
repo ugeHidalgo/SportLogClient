@@ -12,6 +12,7 @@
     ],
     
     materialsStore: undefined,
+    materialModel: undefined,
     selectedRecord: undefined,
     materialForm: undefined,
      
@@ -25,56 +26,94 @@
     },
     
     onSelectionChange: function(model, records) {
-    	var rec = records[0],
+    	var rec = records[0], confirm = false;
             me = this;
             
+        me.materialModel=rec;
         if (!me.existChangesOnWindow()) {
-        	if (rec) {
-        		me.materialForm.getForm().loadRecord(rec);
-        		me.selectedRecord = rec;    
-        	}
+        	me.loadRecordInForm(rec,me);
         	return;
         }
-        
-        if (rec.id!==me.selectedRecord.id){
-    		Ext.MessageBox.show ({
-    			title: 'Confirmar',
-    			msg: 'Hay cambios pendientes de grabar, si continua se perderán los cambios.',
-    			buttons: Ext.MessageBox.YESNO,
-    			buttonsText: {
-    				yes : 'SI',
-    				no : 'NO'
-    			},
-    			scope: me,
-    			fn: function (btn, text){
-    					if (btn=='yes'){
-    						if (rec) {
-        						me.materialForm.getForm().loadRecord(rec);
-        						me.selectedRecord = rec;
-        						return;
-    						}
-    					} else {
-    						me.findAndSelectRecordInGrid(me.selectedRecord);
-    						return;
-    					}
-    			}
-    		});  
-        }
+
+        if (rec.id==me.selectedRecord.id) return;
+        me.confirmPendingChanges(function (confirm){
+         		if (confirm) {
+        			me.loadRecordInForm(rec,me);
+        		} else {
+        			me.findAndSelectRecordInGrid(me.selectedRecord);
+        		}
+        });
     },
     
     onClickLoadStoreData : function (){
     	var me = this;
     		
-    	me.materialsStore.load();
-    	me.clearForm();
-   		me.loadSelectedRecord();
+    	if (!me.existChangesOnWindow()) {
+    		var mask = new Ext.LoadMask(me.materialForm, { msg: "Cargando datos..." });
+        	mask.show();
+    		me.refreshScreen();
+    		mask.hide();
+    		return;
+    	}
     },
     
-    findAndSelectRecordInGrid: function (record) {
-    	var me = this,
-	   		grid = Ext.getCmp('materialsGrid');
-	   			
-    	grid.getSelectionModel().select(record);
+    onClickNew: function () {
+    	var me = this;
+    		
+    	if (!me.existChangesOnWindow()) {
+    		me.createNewEmptyRecord();
+    		return;
+    	}
+    		
+    	me.confirmPendingChanges(function (confirm){
+         		if (confirm) {
+        			me.createNewEmptyRecord();
+        		}
+        	});
+    },
+    
+    onClickSave: function(){
+    	var me = this, 
+    		materialModel;
+    	
+    	if (!me.materialForm.getForm().isDirty()) {
+            Ext.Msg.alert('Atención', 'No hay cambios para salver.');
+            return;
+        }
+        else if (!me.materialForm.getForm().isValid()) {
+            Ext.Msg.alert('Atención', 'Datos incorrectos.');
+            return;
+        }
+
+        me.materialModel.set(me.materialForm.getForm().getValues());
+        
+        me.materialModel.set("purchase_date",new Date());
+		
+        var mask = new Ext.LoadMask(me.materialForm, { msg: "Salvando datos..." });
+        mask.show();
+    	debugger;
+    	me.materialsStore.sync({
+    		success: function (batch, eOpts){
+    			debugger;
+    			me.materialsStore.load();
+    			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
+    			mask.hide();
+    		}
+    	},{
+    		failure: function (batch, eOpts) {
+    			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
+    			mask.hide();
+    		}
+    	});
+    	mask.hide();
+    },
+    
+    refreshScreen: function () {
+    	var me = this;
+    
+    	me.materialsStore.load();
+    	me.clearForm();
+   		//me.loadSelectedRecordInForm();
     },
     
     clearForm: function () {
@@ -90,21 +129,62 @@
     	});
     },
     
-    loadSelectedRecord: function (){
+    loadSelectedRecordInForm: function (){
     	var me = this;
     	if (me.selectedRecord) {
             me.materialForm.getForm().loadRecord(me.selectedRecord);
         }
     },
-   
-    onClickNew: function () {
+    
+    createNewEmptyRecord: function () {
+        var newRecord, me= this;
+        
+        me.materialModel = Ext.create('SportLog.model.Material');
+        	
+        me.materialModel.set("id", "");
+        me.materialModel.set("alias", "prueba");
+        me.materialModel.set("name", "name");
+        
+        me.materialModel.set("status", "0");
+        me.materialModel.set("created_at",new Date());
+        me.materialModel.set("purchase_date",new Date());
+        
+        me.materialsStore.add(me.materialModel);
+        newRecord = me.materialsStore.findRecord('id', me.materialModel.id) ;
+        
+		me.loadRecordInForm(newRecord,me);
+    },
+    
+    findAndSelectRecordInGrid: function (record) {
+    	var grid = Ext.getCmp('materialsGrid');
+	   			
+    	grid.getSelectionModel().select(record);
+    },
+    
+    loadRecordInForm: function (record, scope) {
+    	var me = scope;
+    	if (record) {
+    		me.materialForm.getForm().loadRecord(record);
+        	me.selectedRecord = record;					
+    	}
+    },
+    
+    confirmPendingChanges: function (callBackFn) {
     	var me = this;
-
-        var materialModel = Ext.create('SportLog.model.Material');
-        //materialModel.set("id","-1");
-        materialModel.set("status", "1");
-        materialModel.set("created_at",new Date());
-        me.materialsStore.add(materialModel);
+    
+    		Ext.MessageBox.show ({
+    			title: 'Confirmar',
+    			msg: 'Hay cambios pendientes de grabar, si continua se perderán los cambios.',
+    			buttons: Ext.MessageBox.YESNO,
+    			buttonsText: {
+    				yes : 'SI',
+    				no : 'NO'
+    			},
+    			scope: me,
+    			fn: function (btn, text){
+    					callBackFn(btn=='yes');
+    			}
+    		});  
     },
     
     existChangesOnWindow: function () {
@@ -127,20 +207,6 @@
 //        me.materialsStore.remove(selectedRows);    
 //    },
 //    
-//    onClickSave: function(){
-//    	var me = this;
-//    	
-//    	me.materialsStore.sync({
-//    		success: function (batch, eOpts){
-//    			me.materialsStore.load();
-//    			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
-//    		}
-//    	},{
-//    		failure: function (batch, eOpts) {
-//    			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
-//    		}
-//    	});
-//    },
 //    
 //    onClickWindowUndo : function (){
 //    	var me = this;

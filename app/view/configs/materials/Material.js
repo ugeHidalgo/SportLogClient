@@ -41,6 +41,12 @@
     	viewConfig: {
     		emptyText: 'No hay materiales definidos...'
     	},
+    	
+    	plugins : [
+    		Ext.create('Ext.grid.plugin.CellEditing', {
+            	clicksToEdit : 1
+        	})
+        ],
     
     	columns: [{ 
     		text: 'Compra', 
@@ -49,12 +55,15 @@
     		renderer: Ext.util.Format.dateRenderer ('d/m/Y'), 
     		align: 'center'
     	},{ 
-    		text: 'Alias', 
-    		dataIndex: 'alias', 
+    		text: 'Alias',
+    		id: 'alias_field',
+    		dataIndex: 'alias',
+    		allowBlank: false,
     		width: 100
     	},{ 
     		text: 'Modelo', 
     		dataIndex: 'name', 
+    		allowBlank: false,
     		width: 100
     	}, { 
     		text: 'Marca', 
