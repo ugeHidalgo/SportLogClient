@@ -45,7 +45,11 @@
            			allowBlank: false
        			},{
        				fieldLabel: 'Modelo:',
-           			name: 'name'
+           			name: 'name',
+           			afterLabelTextTpl: [
+               			'<span style="color:red;font-weight:bold" data-qtip="Requerido">*</span>'
+           			],
+           			allowBlank: false
        			},{
        				fieldLabel: 'Marca:',
            			name: 'brand'
@@ -60,7 +64,6 @@
     			},
            		items: [{
        				xtype: 'checkbox',
-       				id: 'statusCheckBox',
        				fieldLabel: 'Activo:',
            			name: 'status'
        			},{

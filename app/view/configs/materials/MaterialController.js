@@ -11,6 +11,7 @@
     	'SportLog.view.configs.materials.MaterialPanel'
     ],
     
+    newRecord : false,
     materialsStore: undefined,
     materialModel: undefined,
     selectedRecord: undefined,
@@ -77,23 +78,27 @@
     		materialModel;
     	
     	if (!me.materialForm.getForm().isDirty()) {
-            Ext.Msg.alert('Atención', 'No hay cambios para salver.');
+            Ext.Msg.alert('Atención', 'No hay cambios para grabar.');
             return;
         }
         else if (!me.materialForm.getForm().isValid()) {
             Ext.Msg.alert('Atención', 'Datos incorrectos.');
             return;
         }
-
-        me.materialModel.set(me.materialForm.getForm().getValues());
-        me.materialsStore.add(me.materialModel);
         
         var mask = new Ext.LoadMask(me.materialForm, { msg: "Salvando datos..." });
         mask.show();
-    	debugger;
+
+        me.materialModel.set(me.materialForm.getForm().getValues());
+        if (me.newRecord) {
+        	me.materialsStore.add(me.materialModel); 
+        }
+        	
     	me.materialsStore.sync({
     		success: function (batch, eOpts){
+    			me.newRecord = false;
     			me.materialsStore.load();
+    			me.loadRecordInForm(me.materialModel,me);
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
     			mask.hide();
     		},
@@ -105,12 +110,65 @@
     	mask.hide();
     },
     
+    onClickDelete: function () {
+    	var me = this, selectedRows,
+    		grid = Ext.getCmp('materialsGrid');
+    		
+    	if (!me.materialModel){
+    		Ext.Msg.alert('Atención', 'Debe seleccionar un material de la lista de materiales para ser borrado.');
+    		return;
+    	}
+    	
+    	Ext.MessageBox.show ({
+    		title: 'Confirmar',
+    		msg: 'Va a borrar el material seleccionado.' +
+    			 '</br>¿Continuar con el borrado?',
+    		buttons: Ext.MessageBox.YESNO,
+    		buttonText: {
+    			yes: 'Si',
+    			no: 'No'
+    		},
+    		scope: me,
+    		fn: function (btn, text){
+    				if (btn=='yes') {
+    					me.deleteMaterial();
+    				}
+    		}
+    	});
+    	
+    	
+    },
+    
+    deleteMaterial: function () {
+    	var me = this,
+    		mask = new Ext.LoadMask(me.materialForm, { msg: "Borrando material seleccionado..." });
+        mask.show();
+    	
+    	me.materialsStore.remove(me.materialModel);
+    	me.materialModel = null;
+    	
+    	me.materialsStore.sync({
+    		success: function (batch, eOpts){
+    			me.materialsStore.load();
+    			me.selectedRecord = null;
+    			me.loadSelectedRecordInForm();
+    			Ext.Msg.alert('Ok','Material borrado correctamente.');
+    			mask.hide();
+    		},
+    		failure: function (batch, eOpts) {
+    			Ext.Msg.alert('Error','El material seleccionado no ha podido ser borrado.');
+    			mask.hide();
+    		}
+    	});
+    	mask.hide();
+    },
+    
     refreshScreen: function () {
     	var me = this;
     
     	me.materialsStore.load();
     	me.clearForm();
-   		//me.loadSelectedRecordInForm();
+   		me.loadSelectedRecordInForm();
     },
     
     clearForm: function () {
@@ -130,12 +188,15 @@
     	var me = this;
     	if (me.selectedRecord) {
             me.materialForm.getForm().loadRecord(me.selectedRecord);
+        } else {
+        	me.clearForm();
         }
     },
     
     createNewEmptyRecord: function () {
         var newRecord, me= this;
         
+        me.newRecord = true;
         me.materialModel = Ext.create('SportLog.model.Material');
         me.materialModel.set("id", "");
         me.materialModel.set("status", "1");
@@ -143,10 +204,6 @@
         me.materialModel.set("purchase_date",new Date());
         
         me.loadRecordInForm(me.materialModel,me);
-        //me.materialsStore.add(me.materialModel);
-        //newRecord = me.materialsStore.findRecord('id', me.materialModel.id) ;
-        
-		//me.loadRecordInForm(newRecord,me);
     },
     
     findAndSelectRecordInGrid: function (record) {
@@ -166,19 +223,20 @@
     confirmPendingChanges: function (callBackFn) {
     	var me = this;
     
-    		Ext.MessageBox.show ({
-    			title: 'Confirmar',
-    			msg: 'Hay cambios pendientes de grabar, si continua se perderán los cambios.',
-    			buttons: Ext.MessageBox.YESNO,
-    			buttonsText: {
-    				yes : 'SI',
-    				no : 'NO'
-    			},
-    			scope: me,
-    			fn: function (btn, text){
-    					callBackFn(btn=='yes');
-    			}
-    		});  
+    	Ext.MessageBox.show ({
+    		title: 'Confirmar',
+    		msg: 'Hay cambios pendientes de grabar, si continua se perderán los cambios.' +
+    			 '</br>¿Continuar sin grabar cambios?',
+    		buttons: Ext.MessageBox.YESNO,
+    		buttonText: {
+    			yes : 'Si',
+    			no : 'No'
+    		},
+    		scope: me,
+    		fn: function (btn, text){
+    				callBackFn(btn=='yes');
+    		}
+    	});  
     },
     
     existChangesOnWindow: function () {
@@ -188,18 +246,6 @@
  
     
 //    
-//    onClickDelete: function () {
-//    	var me = this,
-//    		grid = Ext.getCmp('materialsGrid'),
-//    		selectedRows = grid.getSelectionModel.getSelection();
-//    		
-//        if(selectedRows.length<=0){
-//        	Ext.Msg.alert('Atención', 'No ha seleccionado ninguna fila para borrar.');
-//        	return;
-//        }
-//   
-//        me.materialsStore.remove(selectedRows);    
-//    },
 //    
 //    
 //    onClickWindowUndo : function (){
