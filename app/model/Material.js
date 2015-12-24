@@ -14,7 +14,7 @@
         {name: 'parent_id', type: 'int'},
         {name: 'total_time', type: 'float'},
         {name: 'total_distance', type: 'float'},
-        {name: 'status', type: 'int'},
+        {name: 'status', type: 'boolean'},
         {name: 'created_at', type: 'date'},
         {name: 'purchase_date', type: 'date'},
         {name: 'max_time', type: 'float'},

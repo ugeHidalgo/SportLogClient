@@ -60,6 +60,7 @@
     			},
            		items: [{
        				xtype: 'checkbox',
+       				id: 'statusCheckBox',
        				fieldLabel: 'Activo:',
            			name: 'status'
        			},{

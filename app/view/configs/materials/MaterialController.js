@@ -86,20 +86,17 @@
         }
 
         me.materialModel.set(me.materialForm.getForm().getValues());
+        me.materialsStore.add(me.materialModel);
         
-        me.materialModel.set("purchase_date",new Date());
-		
         var mask = new Ext.LoadMask(me.materialForm, { msg: "Salvando datos..." });
         mask.show();
     	debugger;
     	me.materialsStore.sync({
     		success: function (batch, eOpts){
-    			debugger;
     			me.materialsStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
     			mask.hide();
-    		}
-    	},{
+    		},
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
     			mask.hide();
@@ -140,19 +137,16 @@
         var newRecord, me= this;
         
         me.materialModel = Ext.create('SportLog.model.Material');
-        	
         me.materialModel.set("id", "");
-        me.materialModel.set("alias", "prueba");
-        me.materialModel.set("name", "name");
-        
-        me.materialModel.set("status", "0");
+        me.materialModel.set("status", "1");
         me.materialModel.set("created_at",new Date());
         me.materialModel.set("purchase_date",new Date());
         
-        me.materialsStore.add(me.materialModel);
-        newRecord = me.materialsStore.findRecord('id', me.materialModel.id) ;
+        me.loadRecordInForm(me.materialModel,me);
+        //me.materialsStore.add(me.materialModel);
+        //newRecord = me.materialsStore.findRecord('id', me.materialModel.id) ;
         
-		me.loadRecordInForm(newRecord,me);
+		//me.loadRecordInForm(newRecord,me);
     },
     
     findAndSelectRecordInGrid: function (record) {
