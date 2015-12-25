@@ -74,26 +74,29 @@
     },
     
     onClickSave: function(){
-    	var me = this, 
-    		materialModel;
+    	var me = this, mask,
+    		materialModel, 
+    		form = me.materialForm.getForm();
     	
-    	if (!me.materialForm.getForm().isDirty()) {
+    	if (!form.isDirty()) {
             Ext.Msg.alert('Atención', 'No hay cambios para grabar.');
             return;
         }
-        else if (!me.materialForm.getForm().isValid()) {
+        else if (!form.isValid()) {
             Ext.Msg.alert('Atención', 'Datos incorrectos.');
             return;
         }
         
-        var mask = new Ext.LoadMask(me.materialForm, { msg: "Salvando datos..." });
+        mask = new Ext.LoadMask(me.materialForm, { msg: "Salvando datos..." });
         mask.show();
-
-        me.materialModel.set(me.materialForm.getForm().getValues());
+        
+        me.materialModel.set(form.getValues());
+        me.materialModel.set("purchase_date",
+       					Ext.util.Format.date(form.getFieldValues().purchase_date, 'Y-m-d'));
         if (me.newRecord) {
         	me.materialsStore.add(me.materialModel); 
         }
-        	
+        
     	me.materialsStore.sync({
     		success: function (batch, eOpts){
     			me.newRecord = false;

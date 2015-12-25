@@ -69,10 +69,12 @@
        			},{
             		fieldLabel: 'Alta:',
            			name: 'created_at',
-       				renderer: Ext.util.Format.dateRenderer ('d/m/Y')
+       				format: 'd/m/Y',
+       				readOnly: true
             	},{
        				fieldLabel: 'Compra:',
-           			name: 'purchase_date'
+           			name: 'purchase_date',
+       				format: 'd/m/Y'
    	   			},{
    	   				xtype: 'textfield',
        				fieldLabel: 'Parte de:',
