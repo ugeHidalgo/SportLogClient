@@ -4,7 +4,7 @@
  * 
  */
  
- Ext.define('SportLog.utils.timeHelper', {
+ Ext.define('SportLog.utils.TimeHelper', {
  	
  	bigIntToStringTime: function (number) {
     	var me = this, stringTime = "000:00:00";
