@@ -14,7 +14,7 @@ Ext.define('SportLog.view.login.LoginController', {
 			pass = Ext.getCmp('passwordText').getValue();
 
 		Ext.Ajax.request({
-					url : '/SportlogServer/API/Users/login',
+					url : '/SportLogServer/API/Users/login',
 					method : "POST",
 					headers : {
 						'Content-Type' : 'application/json'

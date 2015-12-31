@@ -1,10 +1,10 @@
 /**
  * 
  */
- Ext.define ('SportLog.model.Activity', {
+ Ext.define ('SportLog.model.ActivityType', {
     extend: 'SportLog.model.Base',
     
-    alias: 'model.activity',
+    alias: 'model.activityType',
     
     fields: [
         {name: 'id', type: 'int', convert: null},

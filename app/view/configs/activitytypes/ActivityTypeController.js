@@ -12,7 +12,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     
     sportTypesComboStore: undefined,
     
-     activitiesStore: undefined,
+    activityTypesStore: undefined,
      
     
     initViewModel: function() {
@@ -21,8 +21,8 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     			
     	me.createSportTypesComboboxStore();
     	
-    	apiHelper.setApiKey(me.getStore('activitiesStore'));
-    	me.activitiesStore = me.getStore('activitiesStore');
+    	apiHelper.setApiKey(me.getStore('activityTypesStore'));
+    	me.activityTypesStore = me.getStore('activityTypesStore');
     },
     
     createSportTypesComboboxStore: function (){
@@ -73,7 +73,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     onClickNew: function () {
     	var me = this;
         
-        var activitiesModel = Ext.create('SportLog.model.Activity');
+        var activitiesModel = Ext.create('SportLog.model.ActivityType');
         activitiesModel.set("id", "");
         activitiesModel.set("name", "Nombre");
         activitiesModel.set("sportType_id", "");

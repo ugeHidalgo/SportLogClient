@@ -1,14 +1,14 @@
 /**
  * 
  */
- Ext.define('SportLog.store.Activity', {
+ Ext.define('SportLog.store.ActivityType', {
     extend: 'Ext.data.Store',
-    model: 'SportLog.model.Activity',
-    alias: 'store.Activity',
+    model: 'SportLog.model.ActivityType',
+    alias: 'store.ActivityType',
 
     proxy: {
         type: 'rest',
-        url: 'http://localhost/SportLog/API/Activities/activities',
+        url: 'http://localhost/SportLog/API/ActivityTypes/activityTypes',
         reader: {
             type: 'json',
             rootProperty: 'data'

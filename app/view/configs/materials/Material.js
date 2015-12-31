@@ -78,7 +78,11 @@
 	   	},{ 
     		text: 'Uso(Tiempo)', 
     		dataIndex: 'total_time', 
-    		width: 120, 
+    		width: 120,
+//    		renderer: function(value){
+//    					var timeHelper = Ext.create ('SportLog.utils.TimeHelper');
+//    					return timeHelper.bigIntToStringTime(value);
+//    					},
     		align: 'right'
     	},{ 
     		text: 'Uso(Dist.)', 

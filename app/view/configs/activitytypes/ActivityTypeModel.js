@@ -6,19 +6,19 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityTypeModel', {
     alias: 'viewmodel.activitytype-model',
     
         requires: [
-        'SportLog.model.Activity',
+        'SportLog.model.ActivityType',
         //'SportLog.model.SportType',
         'SportLog.globals.User'
         ],
     
     stores: {
-        activitiesStore: {
-            model: 'Activity',
+        activityTypesStore: {
+            model: 'ActivityType',
             autoLoad: true,
             
             proxy: {
         		type: 'ajax',
-        		url: '/SportLogServer/API/Activities/activities',
+        		url: '/SportLogServer/API/ActivityTypes/activityTypes',
         		actionMethods: {
         			read: 'GET',
         			create: 'POST',

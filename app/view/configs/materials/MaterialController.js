@@ -7,6 +7,7 @@
     
     requires: [
     	'SportLog.utils.APIHelper',
+    	'SportLog.utils.TimeHelper',
     	'SportLog.store.Material',
     	'SportLog.view.configs.materials.MaterialPanel'
     ],
@@ -24,6 +25,12 @@
     	apiHelper.setApiKey(me.getStore('materialsStore'));
     	me.materialsStore = me.getStore('materialsStore');
     	me.materialForm = Ext.getCmp('materialsForm');
+    },
+    
+    changeToStringTime: function(value){
+    	debugger;
+    	var timeHelper = Ext.create ('SportLog.utils.TimeHelper');
+    	return timeHelper.bigIntToStringTime(value);
     },
     
     onSelectionChange: function(model, records) {

@@ -36,7 +36,7 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     		mode : 'MULTI'
     	},
     
-    	bind: '{activitiesStore}',
+    	bind: '{activityTypesStore}',
     	viewConfig: {
     		emptyText: 'No hay tipos de actividad disponibles'
     	},

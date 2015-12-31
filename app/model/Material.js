@@ -12,15 +12,15 @@
         {name: 'name', type: 'string'},
         {name: 'brand', type: 'string' },
         {name: 'parent_id', type: 'int'},
-        {name: 'total_time', type: 'int'},
+        {name: 'total_time', type: 'string'},
         {name: 'total_distance', type: 'float'},
         {name: 'status', type: 'boolean'},
         {name: 'created_at', type: 'date'},
         {name: 'purchase_date', type: 'date'},
-        {name: 'max_time', type: 'int'},
+        {name: 'max_time', type: 'string'},
         {name: 'max_distance', type: 'float'},
         {name: 'comment', type: 'string'},
-        {name: 'initial_time', type: 'int'},
+        {name: 'initial_time', type: 'string'},
         {name: 'initial_distance', type: 'float'}
     ],
     validators: {
