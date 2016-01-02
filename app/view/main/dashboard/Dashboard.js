@@ -10,6 +10,7 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
     requires: [
         'SportLog.view.main.dashboard.DashboardController',
         'SportLog.view.main.dashboard.DashboardModel',
+        'SportLog.view.main.dashboard.SessionsGrid',
         'Ext.layout.container.VBox'
     ],
 
@@ -50,7 +51,7 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
             	text: 'Total Semanal'
             }, {
             	text: 'Total Mensual',
-            	iconCls: '/SportLog/resources/images/icons/table_refresh.png',
+            	iconCls: '/SportLog/resources/images/icons/table_refresh.png'
             }, {
             	text: 'Total Año'
             }]
@@ -60,10 +61,13 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
        xtype: 'tabpanel',
        bodypadding: 10,
        items: [{
-    		title: 'Entrada de sesión',
-    		height: 400,
+       		title: 'Entrada de sesión',
+    		height: 800,
     		width: 800,
-			html: '<h2>Main content</h2><p>The main content goes here...</p>'
+			//html: '<h2>Main content</h2><p>The main content goes here...</p>'
+    		items: [{
+    			xtype: 'sessionsGrid'
+    		}]
     	}]
     }] 
     

@@ -67,7 +67,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     onClickLoadStoreData : function (){
     	var me = this;
     		
-    	me.activitiesStore.load();
+    	me.activityTypesStore.load();
     },
     
     onClickNew: function () {
@@ -77,7 +77,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
         activitiesModel.set("id", "");
         activitiesModel.set("name", "Nombre");
         activitiesModel.set("sportType_id", "");
-        me.activitiesStore.add(activitiesModel);
+        me.activityTypesStore.add(activitiesModel);
     },
     
     onClickDelete: function () {
@@ -90,15 +90,15 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
         	return;
         }
    
-        me.activitiesStore.remove(selectedRows);    
+        me.activityTypesStore.remove(selectedRows);    
     },
     
     onClickSave: function(){
     	var me = this;
     	
-    	me.activitiesStore.sync({
+    	me.activityTypesStore.sync({
     		success: function (batch, eOpts){
-    			me.activitiesStore.load();
+    			me.activityTypesStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
     		}
     	},{
