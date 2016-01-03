@@ -16,9 +16,9 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
         'Ext.layout.container.VBox'
     ],
     
-	height: 515,
+	height: 300,
     width: 450,
-    //title: 'Tipos de deporte',
+    title: 'Sesiones',
     frame: true,
     closable: false,
     border: true,
@@ -31,66 +31,77 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     	scrollable: true,
     	flex: 1,
     	width: '100%',
-    	//selType: 'checkboxmodel',
-    	//selModel: {
-    	//	mode : 'MULTI'
-    	//},
+    	selType: 'checkboxmodel',
+    	selModel: {
+    		mode : 'MULTI'
+    	},
     
     	bind: '{sessionsStore}',
     	viewConfig: {
     		emptyText: 'No hay sesiones disponibles'
     	},
     
-//    	plugins : [
-//    		Ext.create('Ext.grid.plugin.CellEditing', {
-//            	clicksToEdit : 1
-//        	})
-//        ],
+    	plugins : [
+    		Ext.create('Ext.grid.plugin.CellEditing', {
+            	clicksToEdit : 1
+        	})
+        ],
     
     	columns: [{
        		text: 'Fecha', 
     		dataIndex: 'date', 
-    		width: 40, 
-    		align: 'right'
+    		width: 100 ,
+    		renderer: Ext.util.Format.dateRenderer ('d/m/Y'), 
+    		align: 'center'
     	}, { 
     		text: 'Nombre', 
     		dataIndex: 'name', 
-    		width: 100 
+    		width: 300 
     		//editor : { allowBlank : true }
-    	}]
+    	},{ 
+    		text: 'Tiempo', 
+    		dataIndex: 'sessionTime', 
+    		width: 120,
+    		align: 'right'
+    	},{ 
+    		text: 'Distancia', 
+    		dataIndex: 'sessionDist', 
+    		width: 120, 
+    		align: 'right'
+    	}],
     	
-//    	dockedItems: [{
-//    		xtype: 'toolbar',
-//    		dock: 'bottom',
-//    		ui: 'footer',
-//    		layout:{
-//    			pack: 'left'
-//    		},
-//    		items: [{
-//    			text: 'Nuevo',
-//    			tooltip: 'Crear un nuevo tipo de deporte.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnNew',
-//        		handler: 'onClickNew'
-//    		},{ 
-//    			text: 'Recargar',
-//    			tooltip: 'Recargar los tipos de deporte desechando los cambios.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnLoadStoreData',
-//        		handler: 'onClickLoadStoreData'
-//    		},{ 
-//				text: 'Borrar',
-//				tooltip: 'Borrar los tipos de deportes seleccionados.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnDelete',
-//        		handler: 'onClickDelete'
-//    		},{ 
-//        		text: 'Grabar',
-//        		tooltip: 'Grabar los cambios realizados a las tipos de deportes.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnSave',
-//        		handler: 'onClickSave'
-//    		}]
-//    	}]
+    	dockedItems: [{
+    		xtype: 'toolbar',
+    		dock: 'bottom',
+    		ui: 'footer',
+    		layout:{
+    			pack: 'left'
+    		},
+    		items: [{
+    			text: 'Nuevo',
+    			tooltip: 'Crear nueva sesión.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnNewSession',
+        		handler: 'onClickNewSession'
+    		},{ 
+    			text: 'Recargar',
+    			tooltip: 'Recargar sesiones desechando los cambios.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnLoadSessions',
+        		handler: 'onClickLoadSessions'
+    		},{ 
+				text: 'Borrar',
+				tooltip: 'Borrar las sesiones seleccionados.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnDeleteSessions',
+        		handler: 'onClickDeleteSessions'
+    		},{ 
+        		text: 'Grabar',
+        		tooltip: 'Grabar los cambios realizados a las sesiones.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnSaveSessions',
+        		handler: 'onClickSaveSessions'
+    		}]
+    	}]
     }]
 });
