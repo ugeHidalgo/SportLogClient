@@ -21,7 +21,8 @@
         {name: 'max_distance', type: 'float'},
         {name: 'comment', type: 'string'},
         {name: 'initial_time', type: 'string'},
-        {name: 'initial_distance', type: 'float'}
+        {name: 'initial_distance', type: 'float'},
+        {name: 'userId', type: 'int'}
     ],
     validators: {
         name: [

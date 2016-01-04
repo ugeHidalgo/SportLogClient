@@ -55,16 +55,21 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     },
     
     onClickSave: function(){
-    	var me = this;
+    	var me = this; 
+    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Grabando deportes seleccionados..." });
+    		
+        //mask.show();
     	
     	me.sportTypeStore.sync({
     		success: function (batch, eOpts){
     			me.activitiesStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
+    			//mask.hide();
     		}
     	},{
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
+    			//mask.hide();
     		}
     	});
     }

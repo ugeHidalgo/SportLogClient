@@ -9,7 +9,8 @@
     fields: [
         {name: 'id', type: 'int', convert: null},
         {name: 'name', type: 'string' },
-        {name: 'sportType_id', type: 'int'}
+        {name: 'sportType_id', type: 'int'},
+        {name: 'userId', type: 'int'}
     ],
     validators: {
         name: [

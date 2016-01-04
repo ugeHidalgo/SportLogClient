@@ -13,6 +13,9 @@
     ],
     
     newRecord : false,
+    
+    userId: undefined,
+    
     materialsStore: undefined,
     materialModel: undefined,
     selectedRecord: undefined,
@@ -22,13 +25,14 @@
     	var me = this,
     		apiHelper = Ext.create ('SportLog.utils.APIHelper');
     	
+    	me.userId = SportLog.globals.User.id;
+    		
     	apiHelper.setApiKey(me.getStore('materialsStore'));
     	me.materialsStore = me.getStore('materialsStore');
     	me.materialForm = Ext.getCmp('materialsForm');
     },
     
     changeToStringTime: function(value){
-    	debugger;
     	var timeHelper = Ext.create ('SportLog.utils.TimeHelper');
     	return timeHelper.bigIntToStringTime(value);
     },
@@ -150,9 +154,9 @@
     },
     
     deleteMaterial: function () {
-    	var me = this,
-    		mask = new Ext.LoadMask(me.materialForm, { msg: "Borrando material seleccionado..." });
-        mask.show();
+    	var me = this;
+    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Borrando material seleccionado..." });
+        //mask.show();
     	
     	me.materialsStore.remove(me.materialModel);
     	me.materialModel = null;
@@ -163,11 +167,11 @@
     			me.selectedRecord = null;
     			me.loadSelectedRecordInForm();
     			Ext.Msg.alert('Ok','Material borrado correctamente.');
-    			mask.hide();
+    			//mask.hide();
     		},
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','El material seleccionado no ha podido ser borrado.');
-    			mask.hide();
+    			//mask.hide();
     		}
     	});
     	mask.hide();
@@ -212,6 +216,7 @@
         me.materialModel.set("status", "1");
         me.materialModel.set("created_at",new Date());
         me.materialModel.set("purchase_date",new Date());
+        me.materialModel.set("userId", me.userId);
         
         me.loadRecordInForm(me.materialModel,me);
     },

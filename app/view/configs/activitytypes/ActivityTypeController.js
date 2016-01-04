@@ -84,7 +84,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     },
     
     onClickDelete: function () {
-    	var me = this,
+    	var me = this, mask,
     		grid = Ext.getCmp('activityTypesGrid'),
     		selectedRows = grid.getSelectionModel().getSelection();
     		
@@ -92,24 +92,29 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
         	Ext.Msg.alert('Atención', 'No ha seleccionado ninguna fila para borrar.');
         	return;
         }
-   
-        me.activityTypesStore.remove(selectedRows);    
+   		mask = new Ext.LoadMask(me.materialForm, { msg: "Borrando material seleccionado..." });
+        mask.show();
+        me.activityTypesStore.remove(selectedRows); 
+        mask.hide();
     },
     
     onClickSave: function(){
     	var me = this;
+    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Grabando actividades seleccionadas..." });
+    		
+        //mask.show();
     	
     	me.activityTypesStore.sync({
     		success: function (batch, eOpts){
     			me.activityTypesStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
+    			//mask.hide();
     		}
     	},{
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
+    			//mask.hide();
     		}
     	});
     }
-    
-
 });

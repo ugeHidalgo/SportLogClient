@@ -100,30 +100,40 @@
     
     onClickSaveSessions: function(){
     	var me = this;
+    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Grabando sesiones seleccionadas..." });
+    		
+        //mask.show();
     	
     	me.sessionsStore.sync({
     		success: function (batch, eOpts){
     			me.sessionsStore.load();
     			Ext.Msg.alert('Ok','Sesiones guardadas correctamente.');
+    			//mask.hide();
     		}
     	},{
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios en las sesiones no se han actualizado.');
+    			//mask.hide();
     		}
     	});
     },
     
     onClickSaveActivities: function(){
     	var me = this;
+    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Grabando actividades seleccionadas..." });
+    		
+        //mask.show();
     	
     	me.activitiesStore.sync({
     		success: function (batch, eOpts){
     			me.activitiesStore.load();
     			Ext.Msg.alert('Ok','Actividades guardadas correctamente.');
+    			//mask.hide();
     		}
     	},{
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios en las actividades no se han actualizado.');
+    			//mask.hide();
     		}
     	});
     }
