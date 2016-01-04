@@ -16,12 +16,13 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
         'Ext.layout.container.VBox'
     ],
     
-	height: 300,
-    width: 450,
+	height: 400,
+    width: 700,
+    padding: 10,
     title: 'Sesiones',
-    frame: true,
+    frame: false,
     closable: false,
-    border: true,
+    border: false,
     collapsible: true,
     layout: 'vbox',
     
@@ -56,45 +57,45 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     	}, { 
     		text: 'Nombre', 
     		dataIndex: 'name', 
-    		width: 300 
+    		width: 350 
     		//editor : { allowBlank : true }
     	},{ 
     		text: 'Tiempo', 
     		dataIndex: 'sessionTime', 
-    		width: 120,
+    		width: 100,
     		align: 'right'
     	},{ 
     		text: 'Distancia', 
     		dataIndex: 'sessionDist', 
-    		width: 120, 
+    		width: 100, 
     		align: 'right'
     	}],
     	
     	dockedItems: [{
     		xtype: 'toolbar',
-    		dock: 'bottom',
+    		dock: 'top',
     		ui: 'footer',
     		layout:{
     			pack: 'left'
     		},
     		items: [{
-    			text: 'Nuevo',
+    			text: '+',
     			tooltip: 'Crear nueva sesión.',
     			//iconCls: 'poner aqui el icono correspondiente',
         		itemId: 'btnNewSession',
         		handler: 'onClickNewSession'
+    		},{ 
+				text: '-',
+				tooltip: 'Borrar las sesiones seleccionados.',
+    			//iconCls: 'poner aqui el icono correspondiente',
+        		itemId: 'btnDeleteSessions',
+        		handler: 'onClickDeleteSessions'
     		},{ 
     			text: 'Recargar',
     			tooltip: 'Recargar sesiones desechando los cambios.',
     			//iconCls: 'poner aqui el icono correspondiente',
         		itemId: 'btnLoadSessions',
         		handler: 'onClickLoadSessions'
-    		},{ 
-				text: 'Borrar',
-				tooltip: 'Borrar las sesiones seleccionados.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnDeleteSessions',
-        		handler: 'onClickDeleteSessions'
     		},{ 
         		text: 'Grabar',
         		tooltip: 'Grabar los cambios realizados a las sesiones.',

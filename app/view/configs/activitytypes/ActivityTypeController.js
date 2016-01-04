@@ -82,7 +82,7 @@ Ext.define ('SportLog.view.configs.activitytypes.ActivityTypeController',{
     
     onClickDelete: function () {
     	var me = this,
-    		grid = Ext.getCmp('activitiesGrid'),
+    		grid = Ext.getCmp('activityTypesGrid'),
     		selectedRows = grid.getSelectionModel().getSelection();
     		
         if(selectedRows.length<=0){

@@ -11,6 +11,7 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
         'SportLog.view.main.dashboard.DashboardController',
         'SportLog.view.main.dashboard.DashboardModel',
         'SportLog.view.main.dashboard.SessionsGrid',
+        'SportLog.view.main.dashboard.ActivitiesGrid',
         'Ext.layout.container.VBox'
     ],
 
@@ -64,9 +65,11 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
        		title: 'Entrada de sesión',
     		height: 800,
     		width: 800,
-			//html: '<h2>Main content</h2><p>The main content goes here...</p>'
+    		scrollable: true,
     		items: [{
     			xtype: 'sessionsGrid'
+    		},{
+    			xtype: 'activitiesGrid'
     		}]
     	}]
     }] 

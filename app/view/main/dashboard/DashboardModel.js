@@ -7,6 +7,7 @@
     
     requires: [
         'SportLog.model.Session',
+        'SportLog.model.Activity',
         'SportLog.globals.User'
         ],
     
@@ -18,6 +19,34 @@
             proxy: {
         		type: 'ajax',
         		url: '/SportLogServer/API/Sessions/sessions',
+        		actionMethods: {
+        			read: 'GET',
+        			create: 'POST',
+        			update: 'PUT',
+        			destroy: 'DELETE'
+        		},
+        		headers: {
+        			'Authorization' : SportLog.globals.User.apiKey
+        		},
+        		reader: {
+            		type: 'json',
+            		rootProperty: 'data'
+        		},
+        		writer: {
+            		type: 'json',
+            		writeAllFields: true,
+            		rootProperty: 'data'
+        		}
+    		}
+        },
+        
+        activitiesStore: {
+            model: 'Activity',
+            autoLoad: true,
+            
+            proxy: {
+        		type: 'ajax',
+        		url: '/SportLogServer/API/Activities/activities',
         		actionMethods: {
         			read: 'GET',
         			create: 'POST',
