@@ -52,15 +52,15 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     		dataIndex: 'id', 
     		width: 40, 
     		align: 'right' 
-    	}, { 
+    	},{ 
     		text: 'Nombre', 
     		dataIndex: 'name', 
-    		width: 200,
+    		width: 150,
     		editor : { allowBlank : true }
     	},{
     		text: 'Tipo de deporte', 
     		dataIndex: 'sportType_id', 
-    		width: 200,
+    		width: 150,
         	editor: new Ext.form.field.ComboBox({
         			id: 'sportTypesCombobox',
         			displayField: 'name',
@@ -68,6 +68,11 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
         			queryMode: 'local'
         	}),
         	renderer: 'renderFunction'
+    	},{ 
+    		text: 'Commentarios', 
+    		dataIndex: 'comment', 
+    		width: 250,
+    		editor : { allowBlank : true }
     	}],
     	
     	dockedItems: [{

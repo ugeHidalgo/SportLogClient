@@ -8,6 +8,7 @@ Ext.define ('SportLog.model.SportType', {
     
     fields: [
         {name: 'id', type: 'int', convert: null},
+        {name: 'userId', type: 'int'},
         {name: 'name', type: 'string' },
         {name: 'comment', type: 'string'}
     ],

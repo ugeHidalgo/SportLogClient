@@ -11,9 +11,13 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     
     sportTypeStore: undefined,
     
+    userId: undefined,
+    
     initViewModel: function() {
     	var me = this,
     		apiHelper = Ext.create ('SportLog.utils.APIHelper');
+    		
+    	me.userId = SportLog.globals.User.id;
     	
     	apiHelper.setApiKey(me.getStore('sportTypesStore'));
     	
@@ -33,6 +37,7 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
         sportTypeModel.set("id", "");
         sportTypeModel.set("name", "Nombre");
         sportTypeModel.set("coment", "");
+        sportTypeModel.set("userId", me.userId);
         me.sportTypeStore.add(sportTypeModel);
     },
     
