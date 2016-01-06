@@ -12,6 +12,7 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     sportTypeStore: undefined,
     
     userId: undefined,
+    sportTypesPanel : undefined,
     
     initViewModel: function() {
     	var me = this,
@@ -22,6 +23,8 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     	apiHelper.setApiKey(me.getStore('sportTypesStore'));
     	
     	me.sportTypeStore = me.getStore('sportTypesStore');
+    	
+    	me.sportTypesPanel = Ext.getCmp('sportTypesPanel');
     },
     
     onClickLoadStoreData : function (){
@@ -55,23 +58,35 @@ Ext.define ('SportLog.view.configs.sporttypes.SportTypeController',{
     },
     
     onClickSave: function(){
-    	var me = this; 
-    		//mask = new Ext.LoadMask(me.materialForm, { msg: "Grabando deportes seleccionados..." });
-    		
-        //mask.show();
-    	
+    	var me = this, mask;
+  	
+    	if (!me.isDirty(me.sportTypeStore)) {
+    		Ext.Msg.alert('Atención','No había cambios pendientes de grabar.');
+    		return;
+    	}
+        mask = me.createMask(me.sportTypesPanel,'Grabando tipos de deporte...');
+        mask.show();
     	me.sportTypeStore.sync({
     		success: function (batch, eOpts){
-    			me.activitiesStore.load();
     			Ext.Msg.alert('Ok','Cambios actualizados correctamente.');
-    			//mask.hide();
+    			mask.hide();
     		}
     	},{
     		failure: function (batch, eOpts) {
     			Ext.Msg.alert('Error','Los cambios no se han actualizado.');
-    			//mask.hide();
+    			mask.hide();
     		}
     	});
+    },
+    
+    createMask: function (targetToMask,messageToShowDuringMask) {
+    	return new Ext.LoadMask({ target: targetToMask, msg: messageToShowDuringMask });
+    },
+    
+    isDirty: function (store) {
+    	return (store.getNewRecords().length > 0) ||
+    		   (store.getUpdatedRecords().length >0 ) ||
+    		   (store.getRemovedRecords().length > 0);
     }
 });
 

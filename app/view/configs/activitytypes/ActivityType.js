@@ -19,6 +19,7 @@ Ext.define('SportLog.view.configs.activitytypes.ActivityType', {
     height: 515,
     width: 600,
     title: 'Tipos de actividad',
+    id: 'activityTypesPanel',
     frame: true,
     closable: false,
     border: true,

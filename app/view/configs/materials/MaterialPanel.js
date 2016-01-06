@@ -72,7 +72,7 @@
        				format: 'd/m/Y',
        				readOnly: true
             	},{
-       				fieldLabel: 'Compra:',
+       				fieldLabel: 'Compra:', //TODO: poner un date time picker
            			name: 'purchase_date',
        				format: 'd/m/Y'
    	   			},{

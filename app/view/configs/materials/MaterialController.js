@@ -149,8 +149,6 @@
     				}
     		}
     	});
-    	
-    	
     },
     
     deleteMaterial: function () {

@@ -21,6 +21,7 @@
     //width: 800,
     padding: 10,
     title: 'Actividades de la sesión',
+    id: 'activitiesPanel',
     frame: false,
     closable: false,
     border: false,

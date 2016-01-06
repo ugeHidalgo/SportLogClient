@@ -20,6 +20,7 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     width: 700,
     padding: 10,
     title: 'Sesiones',
+    id: 'sessionsPanel',
     frame: false,
     closable: false,
     border: false,
@@ -50,25 +51,42 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     
     	columns: [{
        		text: 'Fecha', 
+       		xtype: 'datecolumn',
+    		format: 'd/m/Y',
     		dataIndex: 'date', 
     		width: 100 ,
-    		renderer: Ext.util.Format.dateRenderer ('d/m/Y'), 
-    		align: 'center'
+    		align: 'center',
+    		editor : { 
+    				allowBlank : false,
+    				xtype: 'datefield',
+    				format: 'd/m/Y'
+    			}
     	}, { 
     		text: 'Nombre', 
     		dataIndex: 'name', 
-    		width: 350 
-    		//editor : { allowBlank : true }
+    		width: 350,
+    		editor : { allowBlank : false }
     	},{ 
     		text: 'Tiempo', 
     		dataIndex: 'sessionTime', 
     		width: 100,
-    		align: 'right'
+    		align: 'center',
+    		editor : { 
+    				allowBlank : false ,
+    				align: 'center',
+    				format: '0:00:00'
+    			}
     	},{ 
     		text: 'Distancia', 
-    		dataIndex: 'sessionDist', 
+    		dataIndex: 'sessionDist',
+    		xtype: 'numbercolumn',
+    		format: '0,000',
     		width: 100, 
-    		align: 'right'
+    		align: 'right',
+    		editor : { 
+    				allowBlank : false,
+    				format: '0,000'
+    			}
     	}],
     	
     	dockedItems: [{
