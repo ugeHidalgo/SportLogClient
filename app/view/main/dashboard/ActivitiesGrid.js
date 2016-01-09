@@ -17,11 +17,9 @@
     ],
     
     flex: 1,
-	//height: 400,
+	//height: 600,
     //width: 800,
-    padding: 10,
-    title: 'Actividades de la sesión',
-    id: 'activitiesPanel',
+    padding: 3,
     frame: false,
     closable: false,
     border: false,
@@ -29,7 +27,89 @@
     layout: 'vbox',
     
     items: [{
+    	xtype: 'panel',
+    	title:'Datos de la sesión',
+    	region: 'top',
+    	frame: true,
+    	border: false,
+    	collapsible: true,
+    	height: 180,
+    	width: '100%',
+    	padding: 10,
+    	
+    	items: [{
+    		xtype: 'fieldset',
+        	layout: 'vbox',
+        	bind: '{sessionsStore}',
+        	fieldDefaults: {
+       				labelAlign: 'left',
+       				//flex: 1,
+       				margin: '10 0 0 0'
+    			},
+        	
+        	items: [{
+        		xtype: 'container',
+        		width: '100%',
+       			layout: 'hbox',
+       			defaultType: 'textfield',
+       			fieldDefaults: {
+       				//margin: '-10 10 0 0',
+       				//fieldStyle: 'text-align: left'
+    			},
+    			items: [{
+        			fieldLabel: 'Nombre',
+           			name: 'name',
+           			width: '100%' 
+        		}]
+        	},{
+        		xtype: 'container',
+        		width: '100%',
+       			layout: 'hbox',
+       			defaultType: 'textfield',
+       			fieldDefaults: {
+       				margin: '10 0 0 0'
+       				//fieldStyle: 'text-align: left'
+    			},
+    			items: [{
+    				fieldLabel: 'Fecha',
+            		name: 'date',
+            		//width: 100 ,
+            		flex: 1,
+            		align: 'center',
+    				renderer: Ext.util.Format.dateRenderer ('d/m/Y')
+    			},{
+    				fieldLabel: 'Tiempo', 
+    				name: 'sessionTime', 
+    				//width: 100,
+    				flex: 1,
+    				align: 'center'
+//    				editor : { 
+//    					allowBlank : false ,
+//    					align: 'center',
+//    					format: '0:00:00'
+//    				}
+    			},{
+    				fieldLabel: 'Distancia', 
+    				name: 'sessionDist',
+    				//width: 100,
+    				flex: 1,
+    				align: 'right'
+//    				editor : { 
+//    					xtype: 'numberfield',
+//    					minvalue: 0,
+//    					value: 0,
+//    					maxvalue: 999,
+//    					allowDecimals: true,
+//    					hideTrigger: true,
+//    					decimalPrecision: 3,
+//    					allowBlank : false
+//    				}
+    			}]
+        	}]
+        }]
+    },{
     	xtype: 'grid',
+    	title: 'Actividades',
     	id: 'activitiesGrid',
     	scrollable: true,
     	flex: 1,
@@ -133,17 +213,17 @@
         		itemId: 'btnDeleteActivities',
         		handler: 'onClickDeleteActivity'
     		},{ 
-    			text: 'Recargar',
+    			text: 'Deshacer',
     			tooltip: 'Recargar actividades desechando los cambios.',
     			//iconCls: 'poner aqui el icono correspondiente',
         		itemId: 'btnLoadActivities',
         		handler: 'onClickLoadActivities'
-    		},{ 
-        		text: 'Grabar',
-        		tooltip: 'Grabar las actividades.',
-    			//iconCls: 'poner aqui el icono correspondiente',
-        		itemId: 'btnSaveActivities',
-        		handler: 'onClickSaveActivities'
+//    		},{ 
+//        		text: 'Grabar',
+//        		tooltip: 'Grabar las actividades.',
+//    			//iconCls: 'poner aqui el icono correspondiente',
+//        		itemId: 'btnSaveActivities',
+//        		handler: 'onClickSaveActivities'
     		}]
     	}]
     }]

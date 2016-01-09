@@ -158,32 +158,4 @@
            	}]
     	}]
     }]
-});  
-   
-    
-       	
-//       	buttons: [{
-//    			text: 'Nuevo',
-//    			tooltip: 'Crear un nuevo tipo de material deportivo.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnWindowNew',
-//        		handler: 'onClickWindowNew'
-//    		},{ 
-//    			text: 'Deshacer',
-//    			tooltip: 'Deshacer los cambios.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnWindowUndo',
-//        		handler: 'onClickWindowUndo'
-//    		},{ 
-//				text: 'Cerrar',
-//				tooltip: 'Cerrar ventana sin grabar cambios.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnWindowClose',
-//        		handler: 'onClickWindowClose'
-//    		},{ 
-//        		text: 'Grabar',
-//        		tooltip: 'Grabar los cambios realizados.',
-//    			//iconCls: 'poner aqui el icono correspondiente',
-//        		itemId: 'btnWindowSave',
-//        		handler: 'onClickWindowSave'
-//    		}]
+});

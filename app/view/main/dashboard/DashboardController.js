@@ -12,7 +12,7 @@
     
     sessionsStore: undefined,
     activitiesStore: undefined,
-    userId: undefined, 
+    userId: undefined,
     
     sessionsPanel: undefined,
     activitiesPanel: undefined,
@@ -111,7 +111,7 @@
     	}
     	mask = me.createMask(me.sessionsPanel,'Grabando sesiones...');
         mask.show();
-    	debugger;
+   
     	me.sessionsStore.sync({
     		success: function (batch, eOpts){
     			me.sessionsStore.load();
@@ -150,6 +150,24 @@
     	});
     },
     
+    onSelectSession: function (grid, rowIndex, e) {
+    	var me = this, rec = null,
+    		win = me.lookupReference('activitiesPopupWindow');
+    		
+    		if (!grid.selectionModel.hasSelection()) return;
+    		
+    		rec = grid.selectionModel.getSelection()[0];
+    		
+    		if (!win) {
+    			win = new SportLog.view.main.dashboard.ActivitiesForm();
+
+    			me.setWindowTitle(win, rec.get('name'));
+    			me.getView().add(win);
+    		}
+    		
+    		win.show();
+    },
+    
     createMask: function (targetToMask,messageToShowDuringMask) {
     	return new Ext.LoadMask({ target: targetToMask, msg: messageToShowDuringMask });
     },
@@ -158,5 +176,14 @@
     	return (store.getNewRecords().length > 0) ||
     		   (store.getUpdatedRecords().length >0 ) ||
     		   (store.getRemovedRecords().length > 0);
+    },
+    
+    setWindowTitle: function (win, title) {
+    	var titleShortened = title;
+    	
+    	if (title.length>40){
+    		titleShortened = title.substr(0,40)+'...'; 
+    	}
+    	win.title = win.title + ': '+ titleShortened;
     }
  });

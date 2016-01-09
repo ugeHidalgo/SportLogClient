@@ -17,6 +17,7 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
 
     height: 700,
     width : '100%',
+    scrollable: true,
     //height: '100%',
     
     layout: {
@@ -33,44 +34,50 @@ Ext.define('SportLog.view.main.dashboard.Dashboard', {
     	
     defaults: {
     	frame: true,
-    	collapsible: true
+    	collapsible: false
     },
     
         items: [{
-    	region: 'west',
-        width: 123,
-        split: true,
-        collapsible: true,
-        floatable: false,
-        items: [{
-        	xtype: 'segmentedbutton',
-            vertical: true,
-            items: [{
-            	text: 'Entrada Sesión',
-            	pressed: true
-            }, {
-            	text: 'Total Semanal'
-            }, {
-            	text: 'Total Mensual',
-            	iconCls: '/SportLog/resources/images/icons/table_refresh.png'
-            }, {
-            	text: 'Total Año'
-            }]
-        }]
-    },{
+//    	region: 'west',
+//        width: 123,
+//        split: true,
+//        collapsible: true,
+//        floatable: false,
+//        items: [{
+//        	xtype: 'segmentedbutton',
+//            vertical: true,
+//            items: [{
+//            	text: 'Entrada Sesión',
+//            	pressed: true
+//            }, {
+//            	text: 'Total Semanal'
+//            }, {
+//            	text: 'Total Mensual',
+//            	iconCls: '/SportLog/resources/images/icons/table_refresh.png'
+//            }, {
+//            	text: 'Total Año'
+//            }]
+//        }]
+//    },{
        region: 'center',
        xtype: 'tabpanel',
+       //height: 800,
+       //width: 800,
        bodypadding: 10,
        items: [{
-       		title: 'Entrada de sesión',
-    		height: 800,
-    		width: 800,
-    		scrollable: true,
+       		title: 'Sesiones',
+    		//height: 800,
+    		//width: 800,
+    		scrollable: false,
     		items: [{
     			xtype: 'sessionsGrid'
-    		},{
-    			xtype: 'activitiesGrid'
+//    		},{
+//    			xtype: 'activitiesGrid'
     		}]
+    	},{
+    		title: 'Total Semanal'
+    	},{
+    		title: 'Total Mensual'
     	}]
     }] 
     

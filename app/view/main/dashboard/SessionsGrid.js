@@ -13,26 +13,35 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     requires: [
         'SportLog.view.main.dashboard.DashboardController',
         'SportLog.view.main.dashboard.DashboardModel',
+        'SportLog.view.main.dashboard.ActivitiesForm',
         'Ext.layout.container.VBox'
+        //'Ext.toolbar.Paging'
     ],
     
-	height: 400,
-    width: 700,
+	height: 650,
+    width: '100%', //900,
     padding: 10,
-    title: 'Sesiones',
     id: 'sessionsPanel',
     frame: false,
     closable: false,
     border: false,
-    collapsible: true,
-    layout: 'vbox',
+    layout: 'border',
+    scrollable: true,
     
     items: [{
+    	xtype: 'panel',
+    	region: 'west',
+    	frame: true,
+    	border: true,
+    	collapsible: true,
+    	width: 200
+    },{
     	xtype: 'grid',
+    	region: 'center',
     	id: 'sessionsGrid',
     	scrollable: true,
     	flex: 1,
-    	width: '100%',
+    	//width: '100%',
     	selType: 'checkboxmodel',
     	selModel: {
     		mode : 'MULTI'
@@ -61,33 +70,49 @@ Ext.define('SportLog.view.main.dashboard.SessionsGrid', {
     				xtype: 'datefield',
     				format: 'd/m/Y'
     			}
-    	}, { 
-    		text: 'Nombre', 
-    		dataIndex: 'name', 
-    		width: 350,
-    		editor : { allowBlank : false }
     	},{ 
     		text: 'Tiempo', 
     		dataIndex: 'sessionTime', 
     		width: 100,
-    		align: 'center',
-    		editor : { 
-    				allowBlank : false ,
-    				align: 'center',
-    				format: '0:00:00'
-    			}
+    		align: 'center'
+//    		editor : { 
+//    				allowBlank : false ,
+//    				align: 'center',
+//    				format: '0:00:00'
+//    			}
     	},{ 
     		text: 'Distancia', 
     		dataIndex: 'sessionDist',
-    		xtype: 'numbercolumn',
-    		format: '0,000',
     		width: 100, 
-    		align: 'right',
-    		editor : { 
-    				allowBlank : false,
-    				format: '0,000'
-    			}
+    		align: 'right'
+//    		editor : { 
+//    				xtype: 'numberfield',
+//    				minvalue: 0,
+//    				value: 0,
+//    				maxvalue: 999,
+//    				allowDecimals: true,
+//    				hideTrigger: true,
+//    				decimalPrecision: 3,
+//    				allowBlank : false
+//    			}
+    	},{ 
+    		text: 'Nombre', 
+    		dataIndex: 'name', 
+    		width: 350,
+    		editor : { allowBlank : false }
     	}],
+    	
+//    	bbar: {
+//    		xtype: 'pagingtoolbar',
+//    		pageSize: 10,
+//    		store: '{sessionsStore}',
+//    		displayInfo: true
+//    		//plugins: new Ext.ux.ProgressBarPager()
+//    	},
+    	
+    	listeners: {
+    		rowdblclick: 'onSelectSession'
+    	},
     	
     	dockedItems: [{
     		xtype: 'toolbar',
